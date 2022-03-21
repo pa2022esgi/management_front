@@ -16,7 +16,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-
+        //test
         Label emailLabel = new Label("Email");
         TextField emailInput = new TextField();
         emailInput.setPrefWidth(300);
