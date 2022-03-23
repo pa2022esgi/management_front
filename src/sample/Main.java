@@ -9,15 +9,16 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     @Override
-    public void start(Stage login) throws Exception{
+    public void start(Stage stage) throws Exception{
 
-        Parent root = FXMLLoader.load(getClass().getResource("register.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Scene scene = new Scene(root, 500, 500);
 
-        login.setTitle("Connexion");
-        login.setScene(new Scene(root, 500, 500));
-        login.setMinWidth(500);
-        login.setMinHeight(500);
-        login.show();
+        stage.setTitle("Application");
+        stage.setScene(scene);
+        stage.setMinWidth(500);
+        stage.setMinHeight(500);
+        stage.show();
     }
 
 
