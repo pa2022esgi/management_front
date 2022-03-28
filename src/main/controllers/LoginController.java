@@ -11,6 +11,7 @@ public class LoginController {
     @FXML private Button btn_register;
 
     public void login () {
+
     }
 
     public void register () throws IOException {
