@@ -1,5 +1,6 @@
 package main.controllers;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -15,9 +16,10 @@ public class LoginController {
 
     public void login () {
         OkHttpClient client = new OkHttpClient();
+        Dotenv dotenv = Dotenv.load();
 
         Request request = new Request.Builder()
-            .url("http://127.0.0.1:8000/api/test")
+            .url(dotenv.get("BASE_URL") + "/test")
             .build();
 
         try (Response response = client.newCall(request).execute()) {
