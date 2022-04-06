@@ -59,5 +59,10 @@
             <Insets left="100.0" right="100.0" />
          </GridPane.margin>
       </PasswordField>
+      <Label fx:id="label_error" textFill="RED" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+         <GridPane.margin>
+            <Insets bottom="25.0" />
+         </GridPane.margin>
+      </Label>
    </children>
 </GridPane>
