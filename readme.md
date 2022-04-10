@@ -1,13 +1,13 @@
-##Application de management de projet
+## Application de management de projet
 
 ---
-###Prérequis :
+### Prérequis :
 
 - OpenJdk 15
 - OpenJfx 18
 
 ---
-###Installation de JavaFX :
+### Installation de JavaFX :
 
 https://www.youtube.com/watch?v=hCwtVYSXmsU
 
