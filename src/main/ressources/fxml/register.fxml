@@ -27,7 +27,7 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <TextField prefHeight="35.0" promptText="email" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+      <TextField fx:id="text_email" prefHeight="35.0" promptText="email" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets left="100.0" right="100.0" />
          </GridPane.margin>
@@ -40,18 +40,18 @@
             <Font size="15.0" />
          </font>
          <GridPane.margin>
-            <Insets left="100.0" right="100.0" top="35.0" />
+            <Insets left="100.0" right="100.0" top="50.0" />
          </GridPane.margin>
       </Button>
       <Button fx:id="btn_login" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#login" prefHeight="35.0" prefWidth="500.0" style="-fx-background-color: #0250F7; -fx-cursor: hand;" text="se connecter" textFill="WHITE" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="2">
          <GridPane.margin>
-            <Insets left="100.0" right="100.0" top="50.0" />
+            <Insets left="100.0" right="100.0" top="75.0" />
          </GridPane.margin>
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <PasswordField prefHeight="35.0" promptText="mot de passe" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+      <PasswordField fx:id="text_password" prefHeight="35.0" promptText="mot de passe" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1">
          <font>
             <Font size="14.0" />
          </font>
@@ -59,7 +59,7 @@
             <Insets left="100.0" right="100.0" />
          </GridPane.margin>
       </PasswordField>
-      <PasswordField prefHeight="35.0" promptText="confirmer le mot de passe" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+      <PasswordField fx:id="text_confirm" prefHeight="35.0" promptText="confirmer le mot de passe" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
          <font>
             <Font size="14.0" />
          </font>
@@ -67,5 +67,10 @@
             <Insets left="100.0" right="100.0" />
          </GridPane.margin>
       </PasswordField>
+      <Label fx:id="label_error" textFill="RED" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets top="15.0" />
+         </GridPane.margin>
+      </Label>
    </children>
 </GridPane>

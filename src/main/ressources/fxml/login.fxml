@@ -27,7 +27,7 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <TextField prefHeight="35.0" prefWidth="167.0" promptText="email" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+      <TextField fx:id="text_email" prefHeight="35.0" prefWidth="167.0" promptText="email" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets left="100.0" right="100.0" />
          </GridPane.margin>
@@ -51,7 +51,7 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <PasswordField prefHeight="35.0" promptText="mot de passe" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+      <PasswordField fx:id="text_password" prefHeight="35.0" promptText="mot de passe" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1">
          <font>
             <Font size="14.0" />
          </font>
