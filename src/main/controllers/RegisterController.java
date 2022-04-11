@@ -62,7 +62,7 @@ public class RegisterController {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            label_error.setText("Une erreur est survenue");
         }
     }
 }
