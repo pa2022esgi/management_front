@@ -1,7 +1,10 @@
 package main.models;
 
+import org.json.JSONObject;
+
 public class User {
     private String token;
+    private JSONObject user;
     private final static User INSTANCE = new User();
 
     private User() {}
@@ -16,5 +19,13 @@ public class User {
 
     public String getToken() {
         return this.token;
+    }
+
+    public void setUser(JSONObject user) {
+        this.user = user;
+    }
+
+    public JSONObject getUser() {
+        return this.user;
     }
 }

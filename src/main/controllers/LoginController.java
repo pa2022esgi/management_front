@@ -56,6 +56,7 @@ public class LoginController {
                     label_error.setText("Verifiez votre email / mot de passe");
                 } else {
                     User.getInstance().setToken(json.getString("access_token"));
+                    User.getInstance().setUser(json.getJSONObject("user"));
 
                     btn_login.getScene().setRoot(FXMLLoader.load(getClass().getResource("../ressources/fxml/menu.fxml")));
                 }
