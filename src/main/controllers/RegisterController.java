@@ -1,8 +1,8 @@
 package main.controllers;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -20,8 +20,13 @@ public class RegisterController {
     @FXML private PasswordField text_confirm;
     @FXML private Label label_error;
 
+    @FXML
+    public void initialize() {
+        Platform.runLater(() -> ScreenController.getInstance().setCurrent(btn_register.getScene()));
+    }
+
     public void login () throws IOException {
-        btn_login.getScene().setRoot(FXMLLoader.load(getClass().getResource("../ressources/fxml/login.fxml")));
+        ScreenController.getInstance().changeScreen("login");
     }
 
     public void register () {
@@ -58,7 +63,7 @@ public class RegisterController {
 
                     label_error.setText(error);
                 } else {
-                    btn_register.getScene().setRoot(FXMLLoader.load(getClass().getResource("../ressources/fxml/login.fxml")));
+                    ScreenController.getInstance().changeScreen("login");
                 }
             }
         } catch (IOException e) {

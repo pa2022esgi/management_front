@@ -5,21 +5,36 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.controllers.ScreenController;
+import main.models.Screen;
+
+import java.io.IOException;
 
 public class Main extends Application {
 
     @Override
-    public void start(Stage stage) throws Exception{
+    public void start(Stage stage) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("ressources/fxml/add_project.fxml"));
-        Scene scene = new Scene(root, 700, 750);
+        addScreens();
 
+        String startScreen = "login";
+
+        Parent root = ScreenController.getInstance().loadScreen(startScreen);
+        Screen screen = ScreenController.getInstance().getScreen(startScreen);
+        Scene scene = new Scene(root, screen.getWidth(), screen.getHeight());
         stage.setTitle("Application");
         stage.setScene(scene);
         stage.setMinWidth(500);
         stage.setMinHeight(500);
         stage.centerOnScreen();
         stage.show();
+    }
+
+    public void addScreens() {
+        ScreenController.getInstance().addScreen("menu", 0, 500, 500);
+        ScreenController.getInstance().addScreen("add_project", 1, 700, 775);
+        ScreenController.getInstance().addScreen("login", 2, 500, 500);
+        ScreenController.getInstance().addScreen("register", 3, 500, 500);
     }
 
 

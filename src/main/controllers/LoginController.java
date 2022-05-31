@@ -1,8 +1,8 @@
 package main.controllers;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -19,6 +19,11 @@ public class LoginController {
     @FXML private Label label_error;
     @FXML private TextField text_email;
     @FXML private PasswordField text_password;
+
+    @FXML
+    public void initialize() {
+        Platform.runLater(() -> ScreenController.getInstance().setCurrent(btn_login.getScene()));
+    }
 
     public void login () {
         OkHttpClient client = new OkHttpClient();
@@ -58,7 +63,7 @@ public class LoginController {
                     User.getInstance().setToken(json.getString("access_token"));
                     User.getInstance().setUser(json.getJSONObject("user"));
 
-                    btn_login.getScene().setRoot(FXMLLoader.load(getClass().getResource("../ressources/fxml/menu.fxml")));
+                    ScreenController.getInstance().changeScreen("menu");
                 }
             }
         } catch (IOException e) {
@@ -67,6 +72,6 @@ public class LoginController {
     }
 
     public void register () throws IOException {
-        btn_register.getScene().setRoot(FXMLLoader.load(getClass().getResource("../ressources/fxml/register.fxml")));
+        ScreenController.getInstance().changeScreen("register");
     }
 }
