@@ -17,7 +17,7 @@ public class Main extends Application {
 
         addScreens();
 
-        String startScreen = "login";
+        String startScreen = "add_project";
 
         Parent root = ScreenController.getInstance().loadScreen(startScreen);
         Screen screen = ScreenController.getInstance().getScreen(startScreen);
@@ -32,7 +32,7 @@ public class Main extends Application {
 
     public void addScreens() {
         ScreenController.getInstance().addScreen("menu", 0, 500, 500);
-        ScreenController.getInstance().addScreen("add_project", 1, 700, 775);
+        ScreenController.getInstance().addScreen("add_project", 1, 700, 825);
         ScreenController.getInstance().addScreen("login", 2, 500, 500);
         ScreenController.getInstance().addScreen("register", 3, 500, 500);
     }

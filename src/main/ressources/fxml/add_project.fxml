@@ -10,9 +10,10 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controllers.AddProjectController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controllers.AddProjectController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -31,7 +32,7 @@
             <Insets left="25.0" top="25.0" />
          </GridPane.margin>
       </Button>
-      <TextField maxWidth="300.0" prefHeight="35.0" promptText="code du tableau" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <TextField fx:id="text_join" maxWidth="300.0" prefHeight="35.0" promptText="code du tableau" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets bottom="50.0" top="25.0" />
          </GridPane.margin>
@@ -39,7 +40,7 @@
             <Font size="14.0" />
          </font>
       </TextField>
-      <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #0250F7; -fx-cursor: hand;" text="rejoindre le tableau" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+      <Button fx:id="btn_join" mnemonicParsing="false" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #0250F7; -fx-cursor: hand;" text="rejoindre le tableau" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER">
          <font>
             <Font size="15.0" />
          </font>
@@ -55,12 +56,12 @@
             <Insets top="100.0" />
          </GridPane.margin>
       </Label>
-      <TextField maxWidth="650.0" prefHeight="35.0" promptText="nom du projet" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+      <TextField fx:id="text_name" maxWidth="650.0" prefHeight="35.0" promptText="nom du projet" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextArea maxHeight="150.0" maxWidth="650.0" prefHeight="0.0" prefWidth="0.0" promptText="description" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+      <TextArea fx:id="text_description" maxHeight="150.0" maxWidth="650.0" prefHeight="0.0" prefWidth="0.0" promptText="description" style="-fx-wrap-text: true;" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets top="25.0" />
          </GridPane.margin>
@@ -76,12 +77,15 @@
             <Insets bottom="20.0" left="25.0" />
          </GridPane.margin>
       </Label>
-      <ScrollPane maxHeight="190.0" prefHeight="0.0" prefWidth="0.0" GridPane.rowIndex="2" GridPane.valignment="TOP">
+      <ScrollPane fx:id="scroll_labels" maxHeight="190.0" prefHeight="0.0" prefWidth="0.0" GridPane.rowIndex="2" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets left="25.0" right="25.0" />
          </GridPane.margin>
+         <content>
+            <VBox fx:id="box_labels" prefHeight="150.0" prefWidth="298.0" />
+         </content>
       </ScrollPane>
-      <Button maxWidth="650.0" mnemonicParsing="false" prefHeight="35.0" style="-fx-background-color: #0250F7; -fx-cursor: hand;" text="créer le tableau" textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+      <Button fx:id="btn_create" maxWidth="650.0" mnemonicParsing="false" prefHeight="35.0" style="-fx-background-color: #0250F7; -fx-cursor: hand;" text="créer le tableau" textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
          <font>
             <Font size="15.0" />
          </font>
@@ -89,26 +93,31 @@
             <Insets bottom="10.0" />
          </GridPane.margin>
       </Button>
-      <TextField maxWidth="300.0" prefHeight="35.0" promptText="nom" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+      <TextField fx:id="text_label" maxWidth="300.0" prefHeight="35.0" promptText="nom" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
          <font>
             <Font size="14.0" />
          </font>
          <GridPane.margin>
-            <Insets top="25.0" />
+            <Insets />
          </GridPane.margin>
       </TextField>
-      <ColorPicker maxWidth="300.0" prefHeight="35.0" promptText="couleur" style="-fx-cursor: hand;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+      <ColorPicker fx:id="color_label" maxWidth="300.0" prefHeight="35.0" promptText="couleur" style="-fx-cursor: hand;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
          <GridPane.margin>
-            <Insets bottom="50.0" />
+            <Insets bottom="85.0" />
          </GridPane.margin>
       </ColorPicker>
-      <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #4CAF50; -fx-cursor: hand;" text="ajouter" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+      <Button fx:id="btn_label" mnemonicParsing="false" onAction="#addLabel" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #4CAF50; -fx-cursor: hand;" text="ajouter" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
          <font>
             <Font size="15.0" />
          </font>
          <GridPane.margin>
-            <Insets bottom="75.0" />
+            <Insets bottom="85.0" />
          </GridPane.margin>
       </Button>
+      <Label fx:id="label_error" textFill="RED" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+         <GridPane.margin>
+            <Insets bottom="55.0" />
+         </GridPane.margin>
+      </Label>
    </children>
 </GridPane>
