@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import main.models.User;
+import main.services.ScreenService;
 import okhttp3.*;
 import org.json.JSONObject;
 
@@ -22,7 +23,7 @@ public class LoginController {
 
     @FXML
     public void initialize() {
-        Platform.runLater(() -> ScreenController.getInstance().setCurrent(btn_login.getScene()));
+        Platform.runLater(() -> ScreenService.getInstance().setCurrent(btn_login.getScene()));
     }
 
     public void login () {
@@ -63,7 +64,7 @@ public class LoginController {
                     User.getInstance().setToken(json.getString("access_token"));
                     User.getInstance().setUser(json.getJSONObject("user"));
 
-                    ScreenController.getInstance().changeScreen("menu");
+                    ScreenService.getInstance().changeScreen("menu");
                 }
             }
         } catch (IOException e) {
@@ -72,6 +73,6 @@ public class LoginController {
     }
 
     public void register () throws IOException {
-        ScreenController.getInstance().changeScreen("register");
+        ScreenService.getInstance().changeScreen("register");
     }
 }

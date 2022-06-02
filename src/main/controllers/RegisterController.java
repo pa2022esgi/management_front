@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import main.services.ScreenService;
 import okhttp3.*;
 import org.json.JSONObject;
 
@@ -22,11 +23,11 @@ public class RegisterController {
 
     @FXML
     public void initialize() {
-        Platform.runLater(() -> ScreenController.getInstance().setCurrent(btn_register.getScene()));
+        Platform.runLater(() -> ScreenService.getInstance().setCurrent(btn_register.getScene()));
     }
 
     public void login () throws IOException {
-        ScreenController.getInstance().changeScreen("login");
+        ScreenService.getInstance().changeScreen("login");
     }
 
     public void register () {
@@ -63,7 +64,7 @@ public class RegisterController {
 
                     label_error.setText(error);
                 } else {
-                    ScreenController.getInstance().changeScreen("login");
+                    ScreenService.getInstance().changeScreen("login");
                 }
             }
         } catch (IOException e) {

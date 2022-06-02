@@ -12,7 +12,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
+import main.services.ScreenService;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -33,11 +33,12 @@ public class AddProjectController {
 
     @FXML
     public void initialize() {
-        Platform.runLater(() -> ScreenController.getInstance().setCurrent(btn_menu.getScene()));
+        Platform.runLater(() -> ScreenService.getInstance().setCurrent(btn_menu.getScene()));
+        scroll_labels.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
     }
 
     public void backToMenu () throws IOException {
-        ScreenController.getInstance().changeScreen("menu");
+        ScreenService.getInstance().changeScreen("menu");
     }
 
     public void addLabel () throws URISyntaxException {
@@ -56,10 +57,10 @@ public class AddProjectController {
             btn_icon.setFitHeight(20);
             del_btn.setAlignment(Pos.CENTER_RIGHT);
             del_btn.setGraphic(btn_icon);
-
-            scroll_labels.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            handleAction(del_btn, new_box);
 
             new_label.setFont(font);
+            new_label.setStyle("-fx-text-fill: " + getContrastColor(color) + ";");
 
             Region spacer = new Region();
             HBox.setHgrow(spacer, Priority.ALWAYS);
@@ -70,10 +71,35 @@ public class AddProjectController {
             new_box.getChildren().addAll(new_label, spacer, del_btn);
 
             box_labels.getChildren().add(new_box);
+        } else {
+            label_error.setText("Un nom de label est requis");
         }
     }
+
+    private void handleAction(Button target, HBox box) {
+        target.setOnAction(e -> {
+            box_labels.getChildren().remove(box);
+        });
+    }
+
     public static String toRGBCode(Color color)
     {
         return String.format("#%02X%02X%02X", (int)(color.getRed() * 255), (int)(color.getGreen() * 255), (int)(color.getBlue() * 255));
     }
+
+    public static String getContrastColor (String color){
+
+        if (color.charAt(0) == '#') {
+            color = color.substring(1);
+        }
+
+        int r = (int) color.charAt(0) + (int) color.charAt(1);
+        int g = (int) color.charAt(2) + (int) color.charAt(2);
+        int b = (int) color.charAt(3) + (int) color.charAt(4);
+
+        int yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+
+        return (yiq >= 128) ? "black" : "white";
+
+    };
 }

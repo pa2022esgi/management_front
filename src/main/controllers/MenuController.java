@@ -4,7 +4,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import main.models.User;
+import main.services.ScreenService;
 
 import java.io.IOException;
 
@@ -16,12 +16,12 @@ public class MenuController {
 
     @FXML
     public void initialize() {
-        Platform.runLater(() -> ScreenController.getInstance().setCurrent(btn_boards.getScene()));
+        Platform.runLater(() -> ScreenService.getInstance().setCurrent(btn_boards.getScene()));
         //label_email.setText("Connecté en tant que : " + User.getInstance().getUser().getString("email"));
     }
 
     public void logout() throws IOException {
-        ScreenController.getInstance().changeScreen("login");
+        ScreenService.getInstance().changeScreen("login");
     }
 
     public void getBoardList() {
@@ -29,6 +29,6 @@ public class MenuController {
     }
 
     public void newBoard() throws IOException {
-        ScreenController.getInstance().changeScreen("add_project");
+        ScreenService.getInstance().changeScreen("add_project");
     }
 }

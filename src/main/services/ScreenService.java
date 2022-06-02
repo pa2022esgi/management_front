@@ -1,4 +1,4 @@
-package main.controllers;
+package main.services;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,16 +9,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ScreenController {
+public class ScreenService {
     private final HashMap<String, Integer> screenMap = new HashMap<>();
     private final ArrayList<Screen> screens = new ArrayList<>();
     private Scene current;
 
-    private final static ScreenController INSTANCE = new ScreenController();
+    private final static ScreenService INSTANCE = new ScreenService();
 
-    private ScreenController() {}
+    private ScreenService() {}
 
-    public static ScreenController getInstance() {
+    public static ScreenService getInstance() {
         return INSTANCE;
     }
 
