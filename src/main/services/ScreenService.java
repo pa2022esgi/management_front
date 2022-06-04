@@ -6,12 +6,10 @@ import javafx.scene.Scene;
 import main.models.Screen;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ScreenService {
-    private final HashMap<String, Integer> screenMap = new HashMap<>();
-    private final ArrayList<Screen> screens = new ArrayList<>();
+    private final HashMap<String, Screen> screenMap = new HashMap<>();
     private Scene current;
 
     private final static ScreenService INSTANCE = new ScreenService();
@@ -20,19 +18,18 @@ public class ScreenService {
 
     public static ScreenService getInstance() { return INSTANCE; }
 
-    public void addScreen(String name, int index, int width, int height) {
+    public void addScreen(String name, int width, int height) {
         String path = "../ressources/fxml/" + name + ".fxml";
-        screens.add(new Screen(path, width, height));
-        screenMap.put(name, index);
+        screenMap.put(name, new Screen(path, width, height));
     }
 
     public Parent loadScreen (String name) throws IOException {
-        Screen screen = screens.get(screenMap.get(name));
+        Screen screen = screenMap.get(name);
         return FXMLLoader.load(getClass().getResource(screen.getPath()));
     }
 
     public Screen getScreen (String name) {
-        return screens.get(screenMap.get(name));
+        return screenMap.get(name);
     }
 
     public void setCurrent(Scene scene) {
@@ -40,7 +37,7 @@ public class ScreenService {
     }
 
     public void changeScreen (String name) throws IOException {
-        Screen screen = screens.get(screenMap.get(name));
+        Screen screen = screenMap.get(name);
         current.setRoot(FXMLLoader.load(getClass().getResource(screen.getPath())));
 
         if (current.getWindow().getHeight() != screen.getHeight()) {

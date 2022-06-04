@@ -32,10 +32,10 @@ public class Main extends Application {
     }
 
     public void addScreens() {
-        ScreenService.getInstance().addScreen("menu", 0, 500, 500);
-        ScreenService.getInstance().addScreen("add_project", 1, 700, 825);
-        ScreenService.getInstance().addScreen("login", 2, 500, 500);
-        ScreenService.getInstance().addScreen("register", 3, 500, 500);
+        ScreenService.getInstance().addScreen("menu", 500, 500);
+        ScreenService.getInstance().addScreen("add_project", 700, 825);
+        ScreenService.getInstance().addScreen("login", 500, 500);
+        ScreenService.getInstance().addScreen("register", 500, 500);
     }
 
     public void addImages() {
