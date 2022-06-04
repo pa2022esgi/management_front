@@ -1,15 +1,15 @@
-package main.models;
+package main.services;
 
 import org.json.JSONObject;
 
-public class User {
+public class UserService {
     private String token;
     private JSONObject user;
-    private final static User INSTANCE = new User();
+    private final static UserService INSTANCE = new UserService();
 
-    private User() {}
+    private UserService() {}
 
-    public static User getInstance() {
+    public static UserService getInstance() {
         return INSTANCE;
     }
 

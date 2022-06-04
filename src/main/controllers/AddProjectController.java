@@ -10,9 +10,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import main.services.ScreenService;
+import main.utils.ColorUtil;
+import main.utils.ComponentsUtil;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -45,61 +46,20 @@ public class AddProjectController {
         String name = text_label.getText();
 
         if (name.length() != 0) {
-            String color = toRGBCode(color_label.getValue());
-            String style_class = "-fx-background-color : " + color + "; -fx-border-color : #000000;";
-            Font font = new Font(15);
-            HBox new_box = new HBox();
-            Label new_label = new Label(name);
+            Label new_label = ComponentsUtil.createLabel(name, color_label.getValue());
 
-            Button del_btn = new Button();
-            ImageView btn_icon = new ImageView(getClass().getResource("../ressources/icon/delete.png").toURI().toString());
-            btn_icon.setFitWidth(20);
-            btn_icon.setFitHeight(20);
-            del_btn.setAlignment(Pos.CENTER_RIGHT);
-            del_btn.setGraphic(btn_icon);
-            handleAction(del_btn, new_box);
+            HBox new_box = ComponentsUtil.createLabelBox(color_label.getValue());
 
-            new_label.setFont(font);
-            new_label.setStyle("-fx-text-fill: " + getContrastColor(color) + ";");
+            Button del_btn = ComponentsUtil.createIconButton(20, "icon_del");
+            del_btn.setOnAction(e -> box_labels.getChildren().remove(new_box));
 
             Region spacer = new Region();
             HBox.setHgrow(spacer, Priority.ALWAYS);
 
-            new_box.setPadding(new Insets(5,30,5,20)); //top right bottom left
-            new_box.setAlignment(Pos.CENTER);
-            new_box.setStyle(style_class);
             new_box.getChildren().addAll(new_label, spacer, del_btn);
-
             box_labels.getChildren().add(new_box);
         } else {
             label_error.setText("Un nom de label est requis");
         }
     }
-
-    private void handleAction(Button target, HBox box) {
-        target.setOnAction(e -> {
-            box_labels.getChildren().remove(box);
-        });
-    }
-
-    public static String toRGBCode(Color color)
-    {
-        return String.format("#%02X%02X%02X", (int)(color.getRed() * 255), (int)(color.getGreen() * 255), (int)(color.getBlue() * 255));
-    }
-
-    public static String getContrastColor (String color){
-
-        if (color.charAt(0) == '#') {
-            color = color.substring(1);
-        }
-
-        int r = (int) color.charAt(0) + (int) color.charAt(1);
-        int g = (int) color.charAt(2) + (int) color.charAt(2);
-        int b = (int) color.charAt(3) + (int) color.charAt(4);
-
-        int yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
-
-        return (yiq >= 128) ? "black" : "white";
-
-    };
 }

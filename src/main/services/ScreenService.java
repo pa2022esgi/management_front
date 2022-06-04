@@ -18,9 +18,7 @@ public class ScreenService {
 
     private ScreenService() {}
 
-    public static ScreenService getInstance() {
-        return INSTANCE;
-    }
+    public static ScreenService getInstance() { return INSTANCE; }
 
     public void addScreen(String name, int index, int width, int height) {
         String path = "../ressources/fxml/" + name + ".fxml";

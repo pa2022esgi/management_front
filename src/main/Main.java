@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.services.ImageService;
 import main.services.ScreenService;
 import main.models.Screen;
 
@@ -15,6 +16,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
 
         addScreens();
+        addImages();
 
         String startScreen = "add_project";
 
@@ -36,6 +38,9 @@ public class Main extends Application {
         ScreenService.getInstance().addScreen("register", 3, 500, 500);
     }
 
+    public void addImages() {
+        ImageService.getInstance().addImage("icon_del", "../ressources/icon/delete.png");
+    }
 
     public static void main(String[] args) {
         launch(args);
