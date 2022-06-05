@@ -29,6 +29,7 @@ public class AddProjectController {
     @FXML private Button btn_create;
     @FXML private ColorPicker color_label;
     @FXML private Label label_error;
+    @FXML private Label label_join_error;
     @FXML private ScrollPane scroll_labels;
     @FXML private TextArea text_description;
     @FXML private TextField text_join;
@@ -117,8 +118,47 @@ public class AddProjectController {
                 }
             }
         } catch (IOException e) {
-            System.out.println(e);
             label_error.setText("Une erreur est survenue");
+        }
+    }
+
+    public void joinProject () {
+        OkHttpClient client = new OkHttpClient();
+        Dotenv dotenv = Dotenv.load();
+
+        FormBody.Builder builder = new FormBody.Builder()
+                .add("token", text_join.getText());
+
+        Request request = new Request.Builder()
+                .url(dotenv.get("BASE_URL") + "/projects/join")
+                .post(builder.build())
+                .addHeader("Authorization", "Bearer " + UserService.getInstance().getToken())
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (response.code() == 500) {
+                label_join_error.setText("Une erreur est survenue");
+            } else {
+                if (response.code() == 401) {
+                    ScreenService.getInstance().changeScreen("login");
+                    return;
+                }
+
+                String res = response.body().string();
+                JSONObject json = new JSONObject(res);
+
+                if (response.code() == 400) {
+                    if (json.has("token")) {
+                        label_join_error.setText(json.getJSONArray("token").getString(0));
+                    } else if (json.has("error")) {
+                        label_join_error.setText(json.getString("error"));
+                    }
+                } else {
+                    System.out.println(res);
+                }
+            }
+        } catch (IOException e) {
+            label_join_error.setText("Une erreur est survenue");
         }
     }
 }

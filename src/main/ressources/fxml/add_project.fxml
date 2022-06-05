@@ -40,7 +40,7 @@
             <Font size="14.0" />
          </font>
       </TextField>
-      <Button fx:id="btn_join" mnemonicParsing="false" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #0250F7; -fx-cursor: hand;" text="rejoindre le tableau" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+      <Button fx:id="btn_join" mnemonicParsing="false" onAction="#joinProject" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #0250F7; -fx-cursor: hand;" text="rejoindre le tableau" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER">
          <font>
             <Font size="15.0" />
          </font>
@@ -117,6 +117,11 @@
       <Label fx:id="label_error" textFill="RED" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
          <GridPane.margin>
             <Insets bottom="55.0" />
+         </GridPane.margin>
+      </Label>
+      <Label fx:id="label_join_error" textFill="RED" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER">
+         <GridPane.margin>
+            <Insets top="50.0" />
          </GridPane.margin>
       </Label>
    </children>
