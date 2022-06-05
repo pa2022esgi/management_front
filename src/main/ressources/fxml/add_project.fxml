@@ -85,7 +85,7 @@
             <VBox fx:id="box_labels" prefHeight="150.0" prefWidth="298.0" />
          </content>
       </ScrollPane>
-      <Button fx:id="btn_create" maxWidth="650.0" mnemonicParsing="false" prefHeight="35.0" style="-fx-background-color: #0250F7; -fx-cursor: hand;" text="créer le tableau" textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+      <Button fx:id="btn_create" maxWidth="650.0" mnemonicParsing="false" onAction="#createProject" prefHeight="35.0" style="-fx-background-color: #0250F7; -fx-cursor: hand;" text="créer le tableau" textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
          <font>
             <Font size="15.0" />
          </font>
