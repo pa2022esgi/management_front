@@ -10,7 +10,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import main.models.ProjectLabel;
 import main.services.ScreenService;
-import main.services.UserService;
+import main.services.AuthService;
 import main.utils.ColorUtil;
 import main.utils.ComponentsUtil;
 import okhttp3.*;
@@ -94,7 +94,7 @@ public class AddProjectController {
         Request request = new Request.Builder()
                 .url(dotenv.get("BASE_URL") + "/projects")
                 .post(builder.build())
-                .addHeader("Authorization", "Bearer " + UserService.getInstance().getToken())
+                .addHeader("Authorization", "Bearer " + AuthService.getInstance().getToken())
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
@@ -132,7 +132,7 @@ public class AddProjectController {
         Request request = new Request.Builder()
                 .url(dotenv.get("BASE_URL") + "/projects/join")
                 .post(builder.build())
-                .addHeader("Authorization", "Bearer " + UserService.getInstance().getToken())
+                .addHeader("Authorization", "Bearer " + AuthService.getInstance().getToken())
                 .build();
 
         try (Response response = client.newCall(request).execute()) {

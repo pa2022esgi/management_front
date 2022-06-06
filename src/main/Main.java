@@ -18,7 +18,7 @@ public class Main extends Application {
         addScreens();
         addImages();
 
-        String startScreen = "add_project";
+        String startScreen = "menu";
 
         Parent root = ScreenService.getInstance().loadScreen(startScreen);
         Screen screen = ScreenService.getInstance().getScreen(startScreen);
@@ -36,6 +36,7 @@ public class Main extends Application {
         ScreenService.getInstance().addScreen("add_project", 700, 825);
         ScreenService.getInstance().addScreen("login", 500, 500);
         ScreenService.getInstance().addScreen("register", 500, 500);
+        ScreenService.getInstance().addScreen("show_projects", 1280, 760);
     }
 
     public void addImages() {

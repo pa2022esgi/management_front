@@ -19,15 +19,15 @@
     <children>
         <AnchorPane prefHeight="500.0" prefWidth="500.0">
             <children>
-                <Button fx:id="btn_boards" layoutX="100.0" layoutY="181.0" mnemonicParsing="false" onAction="#getBoardList" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #1558cd#1558cd; -fx-cursor: hand;" text="mes tableaux" textAlignment="CENTER" textFill="#f5f3f3">
+                <Button fx:id="btn_boards" layoutX="100.0" layoutY="181.0" mnemonicParsing="false" onAction="#getProjects" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #1558cd#1558cd; -fx-cursor: hand;" text="Mes projets" textAlignment="CENTER" textFill="#f5f3f3">
                <font>
                   <Font size="15.0" />
                </font></Button>
-                <Button fx:id="btn_new" layoutX="100.0" layoutY="263.0" mnemonicParsing="false" onAction="#newBoard" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #1558cd#1558cd; -fx-cursor: hand;" text="nouveau tableau" textAlignment="CENTER" textFill="#f5f3f3">
+                <Button fx:id="btn_new" layoutX="100.0" layoutY="263.0" mnemonicParsing="false" onAction="#newProject" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #1558cd#1558cd; -fx-cursor: hand;" text="Nouveau projet" textAlignment="CENTER" textFill="#f5f3f3">
                <font>
                   <Font size="15.0" />
                </font></Button>
-                <Button fx:id="btn_logout" layoutX="100.0" layoutY="343.0" mnemonicParsing="false" onAction="#logout" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #1558cd#1558cd; -fx-cursor: hand;" text="se déconnecter" textAlignment="CENTER" textFill="#f5f3f3">
+                <Button fx:id="btn_logout" layoutX="100.0" layoutY="343.0" mnemonicParsing="false" onAction="#logout" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #1558cd#1558cd; -fx-cursor: hand;" text="Se déconnecter" textAlignment="CENTER" textFill="#f5f3f3">
                <font>
                   <Font size="15.0" />
                </font></Button>

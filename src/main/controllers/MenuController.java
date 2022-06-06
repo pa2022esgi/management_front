@@ -24,11 +24,11 @@ public class MenuController {
         ScreenService.getInstance().changeScreen("login");
     }
 
-    public void getBoardList() {
-
+    public void getProjects() throws IOException {
+        ScreenService.getInstance().changeScreen("show_projects");
     }
 
-    public void newBoard() throws IOException {
+    public void newProject() throws IOException {
         ScreenService.getInstance().changeScreen("add_project");
     }
 }
