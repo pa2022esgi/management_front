@@ -35,7 +35,7 @@
             <Font size="14.0" />
          </font>
       </TextField>
-      <Button fx:id="btn_login" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#login" prefHeight="35.0" prefWidth="500.0" style="-fx-background-color: #0250F7; -fx-cursor: hand;" text="se connecter" textFill="WHITE" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+      <Button fx:id="btn_login" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#login" prefHeight="35.0" prefWidth="500.0" style="-fx-background-color: #0250F7; -fx-cursor: hand;" text="Se connecter" textFill="WHITE" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets left="100.0" right="100.0" />
          </GridPane.margin>
@@ -43,7 +43,7 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <Button fx:id="btn_register" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#register" prefHeight="35.0" prefWidth="500.0" style="-fx-background-color: #0250F7; -fx-cursor: hand;" text="s'inscrire" textFill="WHITE" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+      <Button fx:id="btn_register" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#register" prefHeight="35.0" prefWidth="500.0" style="-fx-background-color: #0250F7; -fx-cursor: hand;" text="S'inscrire" textFill="WHITE" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="100.0" right="100.0" />
          </GridPane.margin>

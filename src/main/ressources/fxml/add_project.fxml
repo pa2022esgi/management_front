@@ -24,7 +24,7 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Button fx:id="btn_menu" mnemonicParsing="false" onAction="#backToMenu" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #0250F7; -fx-cursor: hand;" text="retour au menu" textFill="WHITE" GridPane.halignment="LEFT" GridPane.rowSpan="2147483647" GridPane.valignment="TOP">
+      <Button fx:id="btn_menu" mnemonicParsing="false" onAction="#backToMenu" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #0250F7; -fx-cursor: hand;" text="Retour au menu" textFill="WHITE" GridPane.halignment="LEFT" GridPane.rowSpan="2147483647" GridPane.valignment="TOP">
          <font>
             <Font size="15.0" />
          </font>
@@ -40,7 +40,7 @@
             <Font size="14.0" />
          </font>
       </TextField>
-      <Button fx:id="btn_join" mnemonicParsing="false" onAction="#joinProject" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #0250F7; -fx-cursor: hand;" text="rejoindre le tableau" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+      <Button fx:id="btn_join" mnemonicParsing="false" onAction="#joinProject" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #0250F7; -fx-cursor: hand;" text="Rejoindre le projet" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER">
          <font>
             <Font size="15.0" />
          </font>
@@ -85,7 +85,7 @@
             <VBox fx:id="box_labels" prefHeight="150.0" prefWidth="298.0" />
          </content>
       </ScrollPane>
-      <Button fx:id="btn_create" maxWidth="650.0" mnemonicParsing="false" onAction="#createProject" prefHeight="35.0" style="-fx-background-color: #0250F7; -fx-cursor: hand;" text="créer le tableau" textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+      <Button fx:id="btn_create" maxWidth="650.0" mnemonicParsing="false" onAction="#createProject" prefHeight="35.0" style="-fx-background-color: #0250F7; -fx-cursor: hand;" text="Créer un projet" textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
          <font>
             <Font size="15.0" />
          </font>

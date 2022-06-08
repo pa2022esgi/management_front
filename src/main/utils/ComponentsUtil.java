@@ -22,12 +22,12 @@ public class ComponentsUtil {
         return new_label;
     }
 
-    public static Button createIconButton(Integer size, String icon) throws URISyntaxException {
+    public static Button createIconButton(Integer width, Integer height, String icon) throws URISyntaxException {
         Button icon_btn = new Button();
-        icon_btn.setStyle("-fx-cursor: hand;");
+        icon_btn.setStyle("-fx-cursor: hand; -fx-background-color: transparent; -fx-border-color: transparent;");
         ImageView btn_icon = ImageService.getInstance().getImage(icon);
-        btn_icon.setFitWidth(size);
-        btn_icon.setFitHeight(size);
+        btn_icon.setFitWidth(width);
+        btn_icon.setFitHeight(height);
         icon_btn.setGraphic(btn_icon);
         return icon_btn;
     }

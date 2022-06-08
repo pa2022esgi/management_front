@@ -57,7 +57,7 @@ public class AddProjectController {
 
             HBox new_box = ComponentsUtil.createLabelBox(color_label.getValue());
 
-            Button del_btn = ComponentsUtil.createIconButton(20, "icon_del");
+            Button del_btn = ComponentsUtil.createIconButton(16, 20, "icon_del");
             String id = String.valueOf(new Date().getTime());
             del_btn.setId(id);
             labelMap.put(id, new ProjectLabel(name, ColorUtil.toRGBCode(color_label.getValue())));
