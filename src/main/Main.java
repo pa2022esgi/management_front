@@ -34,6 +34,7 @@ public class Main extends Application {
     public void addScreens() {
         ScreenService.getInstance().addScreen("menu", 500, 500);
         ScreenService.getInstance().addScreen("add_project", 700, 825);
+        ScreenService.getInstance().addScreen("edit_project", 700, 850);
         ScreenService.getInstance().addScreen("login", 500, 500);
         ScreenService.getInstance().addScreen("register", 500, 500);
         ScreenService.getInstance().addScreen("show_projects", 1280, 760);

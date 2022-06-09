@@ -121,4 +121,16 @@ public class ShowProjectsController {
             }
         }
     }
+
+    public void editProject() throws IOException {
+        ScreenService.getInstance().changeScreen("edit_project");
+    }
+
+    public void deleteProject() {
+
+    }
+
+    public void addTask() {
+
+    }
 }

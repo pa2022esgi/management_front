@@ -106,7 +106,7 @@
             <Insets bottom="85.0" />
          </GridPane.margin>
       </ColorPicker>
-      <Button fx:id="btn_label" mnemonicParsing="false" onAction="#addLabel" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #4CAF50; -fx-cursor: hand;" text="ajouter" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+      <Button fx:id="btn_label" mnemonicParsing="false" onAction="#addLabel" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #4CAF50; -fx-cursor: hand;" text="Ajouter" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
          <font>
             <Font size="15.0" />
          </font>
