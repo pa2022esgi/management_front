@@ -94,7 +94,7 @@ public class AddProjectController {
         Request request = new Request.Builder()
                 .url(dotenv.get("BASE_URL") + "/projects")
                 .post(builder.build())
-                .addHeader("Authorization", "Bearer " + AuthService.getInstance().getToken())
+                .addHeader("Authorization", "Bearer " + AuthService.getInstance().getUser().getToken())
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
@@ -132,7 +132,7 @@ public class AddProjectController {
         Request request = new Request.Builder()
                 .url(dotenv.get("BASE_URL") + "/projects/join")
                 .post(builder.build())
-                .addHeader("Authorization", "Bearer " + AuthService.getInstance().getToken())
+                .addHeader("Authorization", "Bearer " + AuthService.getInstance().getUser().getToken())
                 .build();
 
         try (Response response = client.newCall(request).execute()) {

@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import main.models.User;
 import main.services.AuthService;
 import main.services.ScreenService;
 import okhttp3.*;
@@ -61,9 +62,11 @@ public class LoginController {
                 } else if (response.code() == 401) {
                     label_error.setText("Verifiez votre email / mot de passe");
                 } else {
-                    AuthService.getInstance().setToken(json.getString("access_token"));
-                    AuthService.getInstance().setUser(json.getJSONObject("user"));
-
+                    AuthService.getInstance().setUser(new User(
+                            json.getString("access_token"),
+                            json.getJSONObject("user").getInt("id"),
+                            json.getJSONObject("user").getString("email")
+                    ));
                     ScreenService.getInstance().changeScreen("menu");
                 }
             }

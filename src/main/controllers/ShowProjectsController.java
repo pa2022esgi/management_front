@@ -25,6 +25,9 @@ import java.util.HashMap;
 
 public class ShowProjectsController {
     @FXML private Button btn_menu;
+    @FXML private Button btn_edit;
+    @FXML private Button btn_delete;
+    @FXML private Button btn_task;
     @FXML private ScrollPane scroll_projects;
     @FXML private VBox box_projects;
     @FXML private ScrollPane scroll_todo;
@@ -68,7 +71,7 @@ public class ShowProjectsController {
         Request request = new Request.Builder()
                 .url(dotenv.get("BASE_URL") + "/projects")
                 .get()
-                .addHeader("Authorization", "Bearer " + AuthService.getInstance().getToken())
+                .addHeader("Authorization", "Bearer " + AuthService.getInstance().getUser().getToken())
                 .build();
 
         try (Response response = client.newCall(request).execute()) {

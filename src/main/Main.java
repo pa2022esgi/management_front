@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.models.User;
+import main.services.AuthService;
 import main.services.ImageService;
 import main.services.ScreenService;
 import main.models.Screen;
@@ -13,23 +15,29 @@ import java.io.IOException;
 public class Main extends Application {
 
     @Override
-    public void start(Stage stage) throws IOException {
+        public void start(Stage stage) throws IOException {
 
-        addScreens();
-        addImages();
+            AuthService.getInstance().setUser(new User(
+                    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTY1NDk0NzI2MCwiZXhwIjoxNjU0OTUwODYwLCJuYmYiOjE2NTQ5NDcyNjAsImp0aSI6IkppaHlhMGJvWldOME4xSDQiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.ZUobO8KoTO3-XfJX3ZivwrcsyxNmxPUOcTjyGCrjAZU",
+                    1,
+                    "test@mail.com"
+            ));
 
-        String startScreen = "menu";
+            addScreens();
+            addImages();
 
-        Parent root = ScreenService.getInstance().loadScreen(startScreen);
-        Screen screen = ScreenService.getInstance().getScreen(startScreen);
-        Scene scene = new Scene(root, screen.getWidth(), screen.getHeight());
-        stage.setTitle("Application");
-        stage.setScene(scene);
-        stage.setMinWidth(500);
-        stage.setMinHeight(500);
-        stage.centerOnScreen();
-        stage.show();
-    }
+            String startScreen = "menu";
+
+            Parent root = ScreenService.getInstance().loadScreen(startScreen);
+            Screen screen = ScreenService.getInstance().getScreen(startScreen);
+            Scene scene = new Scene(root, screen.getWidth(), screen.getHeight());
+            stage.setTitle("Application");
+            stage.setScene(scene);
+            stage.setMinWidth(500);
+            stage.setMinHeight(500);
+            stage.centerOnScreen();
+            stage.show();
+        }
 
     public void addScreens() {
         ScreenService.getInstance().addScreen("menu", 500, 500);

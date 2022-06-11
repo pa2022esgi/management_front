@@ -131,7 +131,7 @@
             <Insets left="10.0" right="10.0" top="240.0" />
          </GridPane.margin>
       </Pane>
-      <Button mnemonicParsing="false" style="-fx-border-color: transparent; -fx-background-color: transparent;" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+      <Button fx:id="btn_delete" mnemonicParsing="false" style="-fx-border-color: transparent; -fx-background-color: transparent;" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets right="10.0" top="5.0" />
          </GridPane.margin>
@@ -143,7 +143,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button mnemonicParsing="false" style="-fx-border-color: transparent; -fx-background-color: transparent;" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+      <Button fx:id="btn_task" mnemonicParsing="false" style="-fx-border-color: transparent; -fx-background-color: transparent;" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
          <graphic>
             <ImageView fitHeight="29.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -155,9 +155,9 @@
             <Insets right="110.0" top="2.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="46.0" style="-fx-border-color: transparent; -fx-background-color: transparent;" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+      <Button fx:id="btn_edit" mnemonicParsing="false" onAction="#editProject" prefHeight="37.0" prefWidth="46.0" style="-fx-border-color: transparent; -fx-background-color: transparent; -fx-cursor: hand;" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
          <graphic>
-            <ImageView fitHeight="23.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="23.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                <image>
                   <Image url="@../icon/edit.png" />
                </image>
