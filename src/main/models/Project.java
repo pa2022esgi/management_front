@@ -2,15 +2,27 @@ package main.models;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
+
 public class Project {
     String name;
     String description;
     String token;
+    private final HashMap<Integer, User> usersMap = new HashMap<>();
+    private final HashMap<Integer, ProjectLabel> labelsMap = new HashMap<>();
 
     public Project(JSONObject json) {
         this.name = json.getString("name");
         this.token = json.getString("token");
-        this.description = json.isNull("description") ? "Aucune description" : json.getString("description");
+        this.description = json.isNull("description") ? "" : json.getString("description");
+        for (int i=0; i < json.getJSONArray("users").length(); i++) {
+            JSONObject user = json.getJSONArray("users").getJSONObject(i);
+            usersMap.put(user.getInt("id"), new User("", user.getInt("id"), user.getString("email"), user.getJSONObject("pivot").getInt("banished") == 1));
+        }
+        for (int i=0; i < json.getJSONArray("labels").length(); i++) {
+            JSONObject label = json.getJSONArray("labels").getJSONObject(i);
+            labelsMap.put(label.getInt("id"), new ProjectLabel(label.getString("name"), label.getString("color")));
+        }
     }
 
     public String getName() {
@@ -23,5 +35,13 @@ public class Project {
 
     public String getToken() {
         return token;
+    }
+
+    public HashMap<Integer, User> getUsersMap() {
+        return usersMap;
+    }
+
+    public HashMap<Integer, ProjectLabel> getLabelsMap() {
+        return labelsMap;
     }
 }

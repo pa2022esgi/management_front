@@ -13,12 +13,11 @@ import main.services.ImageService;
 import java.net.URISyntaxException;
 
 public class ComponentsUtil {
-    public static Label createLabel(String name, Color color) {
+    public static Label createLabel(String name, String color) {
         Label new_label = new Label(name);
-        String convertedColor = ColorUtil.toRGBCode(color);
         Font font = new Font(15);
         new_label.setFont(font);
-        new_label.setStyle("-fx-text-fill: " + ColorUtil.getContrastedColor(convertedColor) + ";");
+        new_label.setStyle("-fx-text-fill: " + ColorUtil.getContrastedColor(color) + ";");
         return new_label;
     }
 
@@ -32,12 +31,40 @@ public class ComponentsUtil {
         return icon_btn;
     }
 
-    public static HBox createLabelBox(Color color) {
+    public static HBox createLabelBox(String color) {
         HBox new_box = new HBox();
         new_box.setAlignment(Pos.CENTER);
         new_box.setPadding(new Insets(5,30,5,20)); //top right bottom left
-        new_box.setStyle("-fx-background-color: " + ColorUtil.toRGBCode(color) + "; -fx-border-color: #000000;");
+        new_box.setStyle("-fx-background-color: " + color + "; -fx-border-color: #000000;");
         return  new_box;
+    }
+
+    public static HBox createMemberBox() {
+        HBox new_box = new HBox();
+        new_box.setAlignment(Pos.CENTER);
+        new_box.setPadding(new Insets(10,30,10,20)); //top right bottom left
+        new_box.setStyle("-fx-border-color: #000000;");
+        return  new_box;
+    }
+
+    public static Button createBanishedButton(boolean isBanished) {
+        Button ban_btn = new Button(isBanished ? "débannir" : "bannir");
+        ban_btn.setPrefWidth(100);
+        ban_btn.setStyle("-fx-font-weight: bold; -fx-font-size: 14;");
+        return ban_btn;
+    }
+
+    public static Label createBanishedLabel(String email, boolean isBanished) {
+        Label new_label = new Label(email);
+        if (isBanished) {
+            new_label.setText(email + " (banni du projet)");
+            new_label.setStyle("-fx-font-size: 14; -fx-text-fill: #FF0000");
+        } else {
+            new_label.setText(email);
+            new_label.setStyle("-fx-font-size: 14; -fx-text-fill: #000000");
+        }
+
+        return new_label;
     }
 
     public static Button createProjectButton(String name) {

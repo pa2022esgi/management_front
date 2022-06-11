@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import main.services.AuthService;
 import main.services.ScreenService;
 
 import java.io.IOException;
@@ -17,7 +18,7 @@ public class MenuController {
     @FXML
     public void initialize() {
         Platform.runLater(() -> ScreenService.getInstance().setCurrent(btn_boards.getScene()));
-        //label_email.setText("Connecté en tant que : " + User.getInstance().getUser().getString("email"));
+        label_email.setText("Connecté en tant que : " + AuthService.getInstance().getUser().getEmail());
     }
 
     public void logout() throws IOException {

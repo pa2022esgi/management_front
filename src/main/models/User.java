@@ -6,11 +6,13 @@ public class User {
     String token;
     Integer id;
     String email;
+    boolean banished;
 
-    public User(String token, Integer id, String email) {
+    public User(String token, Integer id, String email, boolean banished) {
         this.token = token;
         this.id = id;
         this.email = email;
+        this.banished = banished;
     }
 
     public String getToken() {
@@ -23,5 +25,13 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public boolean isBanished() {
+        return banished;
+    }
+
+    public void setBanished(boolean banished) {
+        this.banished = banished;
     }
 }

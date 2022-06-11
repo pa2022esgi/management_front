@@ -9,10 +9,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
 import main.models.Project;
-import main.models.ProjectLabel;
+import main.services.ProjectService;
 import main.services.ScreenService;
 import main.services.AuthService;
-import main.utils.ColorUtil;
 import main.utils.ComponentsUtil;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -20,7 +19,6 @@ import okhttp3.Response;
 import org.json.JSONArray;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.HashMap;
 
 public class ShowProjectsController {
@@ -103,7 +101,7 @@ public class ShowProjectsController {
             new_btn.setOnAction(e -> {
                 currentProject = projectMap.get(new_btn.getId());
                 label_title.setText(currentProject.getToken() + " - " + currentProject.getName());
-                text_description.setText(currentProject.getDescription());
+                text_description.setText(currentProject.getDescription().length() == 0 ? "Aucune description" : currentProject.getDescription());
 
                 if (new_btn != selectedButton) {
                     if (selectedButton != null) {
@@ -120,12 +118,13 @@ public class ShowProjectsController {
                 selectedButton = new_btn;
                 new_btn.setStyle(selected_class);
                 label_title.setText(currentProject.getToken() + " - " + currentProject.getName());
-                text_description.setText(currentProject.getDescription());
+                text_description.setText(currentProject.getDescription().length() == 0 ? "Aucune description" : currentProject.getDescription());
             }
         }
     }
 
     public void editProject() throws IOException {
+        ProjectService.getInstance().setProject(currentProject);
         ScreenService.getInstance().changeScreen("edit_project");
     }
 

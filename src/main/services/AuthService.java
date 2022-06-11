@@ -1,7 +1,6 @@
 package main.services;
 
 import main.models.User;
-import org.json.JSONObject;
 
 public class AuthService {
     private User user;

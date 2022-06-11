@@ -53,9 +53,9 @@ public class AddProjectController {
         String name = text_label.getText();
 
         if (name.length() != 0) {
-            Label new_label = ComponentsUtil.createLabel(name, color_label.getValue());
+            Label new_label = ComponentsUtil.createLabel(name, ColorUtil.toRGBCode(color_label.getValue()));
 
-            HBox new_box = ComponentsUtil.createLabelBox(color_label.getValue());
+            HBox new_box = ComponentsUtil.createLabelBox(ColorUtil.toRGBCode(color_label.getValue()));
 
             Button del_btn = ComponentsUtil.createIconButton(16, 20, "icon_del");
             String id = String.valueOf(new Date().getTime());

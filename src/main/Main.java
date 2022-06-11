@@ -18,15 +18,16 @@ public class Main extends Application {
         public void start(Stage stage) throws IOException {
 
             AuthService.getInstance().setUser(new User(
-                    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTY1NDk0NzI2MCwiZXhwIjoxNjU0OTUwODYwLCJuYmYiOjE2NTQ5NDcyNjAsImp0aSI6IkppaHlhMGJvWldOME4xSDQiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.ZUobO8KoTO3-XfJX3ZivwrcsyxNmxPUOcTjyGCrjAZU",
+                    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTY1NDk2MTE3NCwiZXhwIjoxNjU1MDQ3NTc0LCJuYmYiOjE2NTQ5NjExNzQsImp0aSI6Ik04NG9RcTV5Nkd6Q1YwTDgiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.eHv8z1DyBHbh6uVqpfrPYYIGDPWr_npVgOzetBCkDJU",
                     1,
-                    "test@mail.com"
+                    "test@mail.com",
+                    false
             ));
 
             addScreens();
             addImages();
 
-            String startScreen = "menu";
+            String startScreen = "show_projects";
 
             Parent root = ScreenService.getInstance().loadScreen(startScreen);
             Screen screen = ScreenService.getInstance().getScreen(startScreen);

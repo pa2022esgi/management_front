@@ -65,7 +65,8 @@ public class LoginController {
                     AuthService.getInstance().setUser(new User(
                             json.getString("access_token"),
                             json.getJSONObject("user").getInt("id"),
-                            json.getJSONObject("user").getString("email")
+                            json.getJSONObject("user").getString("email"),
+                            false
                     ));
                     ScreenService.getInstance().changeScreen("menu");
                 }
