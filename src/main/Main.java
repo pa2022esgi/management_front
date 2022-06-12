@@ -34,9 +34,8 @@ public class Main extends Application {
             Scene scene = new Scene(root, screen.getWidth(), screen.getHeight());
             stage.setTitle("Application");
             stage.setScene(scene);
-            stage.setMinWidth(500);
-            stage.setMinHeight(500);
             stage.centerOnScreen();
+            stage.setResizable(false);
             stage.show();
         }
 
@@ -47,6 +46,7 @@ public class Main extends Application {
         ScreenService.getInstance().addScreen("login", 500, 500);
         ScreenService.getInstance().addScreen("register", 500, 500);
         ScreenService.getInstance().addScreen("show_projects", 1280, 760);
+        ScreenService.getInstance().addScreen("add_task", 900, 440);
     }
 
     public void addImages() {

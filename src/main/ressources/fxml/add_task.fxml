@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.CheckComboBox?>
+
+<GridPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controllers.AddTaskController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <TextField fx:id="text_name" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="nom de la tache" GridPane.columnSpan="2147483647" GridPane.valignment="TOP">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="25.0" right="25.0" top="20.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextArea fx:id="text_description" maxHeight="150.0" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="0.0" promptText="description" style="-fx-wrap-text: true;" GridPane.columnSpan="2147483647" GridPane.rowSpan="2" GridPane.valignment="TOP">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="25.0" right="25.0" top="70.0" />
+         </GridPane.margin>
+      </TextArea>
+      <DatePicker fx:id="picker_date" prefHeight="35.0" prefWidth="400.0" promptText="date" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+         <GridPane.margin>
+            <Insets bottom="15.0" />
+         </GridPane.margin>
+      </DatePicker>
+      <ComboBox fx:id="select_status" prefHeight="35.0" prefWidth="400.0" promptText="statut" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+         <GridPane.margin>
+            <Insets bottom="15.0" />
+         </GridPane.margin>
+      </ComboBox>
+      <ComboBox fx:id="select_member" prefHeight="35.0" prefWidth="400.0" promptText="membre" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets top="5.0" />
+         </GridPane.margin>
+      </ComboBox>
+      <CheckComboBox fx:id="select_labels" prefHeight="35.0" prefWidth="400.0" title="labels" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets top="5.0" />
+         </GridPane.margin>
+      </CheckComboBox>
+      <Label fx:id="label_error" textFill="RED" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+      </Label>
+      <Button fx:id="btn_cancel" maxWidth="400.0" mnemonicParsing="false" onAction="#cancel" prefHeight="35.0" style="-fx-background-color: #FF5252; -fx-cursor: hand;" text="Annuler" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="10.0" />
+         </GridPane.margin>
+      </Button>
+      <Button fx:id="btn_create" maxWidth="400.0" mnemonicParsing="false" prefHeight="35.0" style="-fx-background-color: #4CAF50; -fx-cursor: hand;" text="Créer la tache" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="10.0" />
+         </GridPane.margin>
+      </Button>
+   </children>
+</GridPane>

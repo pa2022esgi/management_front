@@ -143,9 +143,9 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="btn_task" mnemonicParsing="false" style="-fx-border-color: transparent; -fx-background-color: transparent;" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+      <Button fx:id="btn_task" mnemonicParsing="false" onAction="#addTask" style="-fx-border-color: transparent; -fx-background-color: transparent; -fx-cursor: hand;" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
          <graphic>
-            <ImageView fitHeight="29.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="29.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                <image>
                   <Image url="@../icon/add_card.png" />
                </image>

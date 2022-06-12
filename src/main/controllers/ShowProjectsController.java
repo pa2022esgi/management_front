@@ -132,7 +132,8 @@ public class ShowProjectsController {
 
     }
 
-    public void addTask() {
-
+    public void addTask() throws IOException {
+        ProjectService.getInstance().setProject(currentProject);
+        ScreenService.getInstance().changeScreen("add_task");
     }
 }
