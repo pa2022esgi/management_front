@@ -60,7 +60,7 @@ public class AddProjectController {
             Button del_btn = ComponentsUtil.createIconButton(16, 20, "icon_del");
             String id = String.valueOf(new Date().getTime());
             del_btn.setId(id);
-            labelMap.put(id, new ProjectLabel(name, ColorUtil.toRGBCode(color_label.getValue())));
+            labelMap.put(id, new ProjectLabel(name, ColorUtil.toRGBCode(color_label.getValue()), null));
             del_btn.setOnAction(e -> {
                 labelMap.remove(del_btn.getId());
                 box_labels.getChildren().remove(new_box);
@@ -114,7 +114,7 @@ public class AddProjectController {
                         label_error.setText(json.getJSONArray("name").getString(0));
                     }
                 } else {
-                    System.out.println(res);
+                    ScreenService.getInstance().changeScreen("show_projects");
                 }
             }
         } catch (IOException e) {
@@ -154,7 +154,7 @@ public class AddProjectController {
                         label_join_error.setText(json.getString("error"));
                     }
                 } else {
-                    System.out.println(res);
+                    ScreenService.getInstance().changeScreen("show_projects");
                 }
             }
         } catch (IOException e) {

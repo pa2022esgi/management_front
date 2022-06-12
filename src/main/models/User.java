@@ -6,9 +6,9 @@ public class User {
     String token;
     Integer id;
     String email;
-    boolean banished;
+    Boolean banished;
 
-    public User(String token, Integer id, String email, boolean banished) {
+    public User(String token, Integer id, String email, Boolean banished) {
         this.token = token;
         this.id = id;
         this.email = email;
@@ -27,11 +27,11 @@ public class User {
         return email;
     }
 
-    public boolean isBanished() {
+    public Boolean isBanished() {
         return banished;
     }
 
-    public void setBanished(boolean banished) {
+    public void setBanished(Boolean banished) {
         this.banished = banished;
     }
 }

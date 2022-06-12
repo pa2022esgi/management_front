@@ -8,20 +8,22 @@ public class Project {
     String name;
     String description;
     String token;
+    Integer id;
     private final HashMap<Integer, User> usersMap = new HashMap<>();
     private final HashMap<Integer, ProjectLabel> labelsMap = new HashMap<>();
 
     public Project(JSONObject json) {
+        this.id = json.getInt("id");
         this.name = json.getString("name");
         this.token = json.getString("token");
         this.description = json.isNull("description") ? "" : json.getString("description");
         for (int i=0; i < json.getJSONArray("users").length(); i++) {
             JSONObject user = json.getJSONArray("users").getJSONObject(i);
-            usersMap.put(user.getInt("id"), new User("", user.getInt("id"), user.getString("email"), user.getJSONObject("pivot").getInt("banished") == 1));
+            usersMap.put(user.getInt("id"), new User(null, user.getInt("id"), user.getString("email"), user.getJSONObject("pivot").getInt("banished") == 1));
         }
         for (int i=0; i < json.getJSONArray("labels").length(); i++) {
             JSONObject label = json.getJSONArray("labels").getJSONObject(i);
-            labelsMap.put(label.getInt("id"), new ProjectLabel(label.getString("name"), label.getString("color")));
+            labelsMap.put(label.getInt("id"), new ProjectLabel(label.getString("name"), label.getString("color"), label.getInt("id")));
         }
     }
 
@@ -43,5 +45,9 @@ public class Project {
 
     public HashMap<Integer, ProjectLabel> getLabelsMap() {
         return labelsMap;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

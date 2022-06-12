@@ -106,7 +106,7 @@
             <Insets bottom="52.0" />
          </GridPane.margin>
       </Label>
-      <Button fx:id="btn_save" maxWidth="650.0" mnemonicParsing="false" prefHeight="35.0" style="-fx-background-color: #0250F7; -fx-cursor: hand;" text="Sauvegarder les changements" textFill="WHITE" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+      <Button fx:id="btn_save" maxWidth="650.0" mnemonicParsing="false" onAction="#saveProject" prefHeight="35.0" style="-fx-background-color: #0250F7; -fx-cursor: hand;" text="Sauvegarder les changements" textFill="WHITE" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
          <font>
             <Font size="15.0" />
          </font>

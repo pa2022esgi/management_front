@@ -1,5 +1,6 @@
 package main.controllers;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -16,11 +17,17 @@ import main.services.ProjectService;
 import main.services.ScreenService;
 import main.utils.ColorUtil;
 import main.utils.ComponentsUtil;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class EditProjectController {
     @FXML private Button btn_menu;
@@ -81,8 +88,7 @@ public class EditProjectController {
 
         if (name.length() != 0) {
             String color = ColorUtil.toRGBCode(color_label.getValue());
-            String id = String.valueOf(new Date().getTime());
-            createLabel(name, color, id);
+            createLabel(name, color, null);
         } else {
             label_error.setText("Un nom de label est requis");
         }
@@ -92,8 +98,13 @@ public class EditProjectController {
         Label new_label = ComponentsUtil.createLabel(name, color);
         HBox new_box = ComponentsUtil.createLabelBox(color);
         Button del_btn = ComponentsUtil.createIconButton(16, 20, "icon_del");
+        if (id == null) {
+            id = String.valueOf(new Date().getTime());
+            labelMap.put(id, new ProjectLabel(name, color, null));
+        } else {
+            labelMap.put(id, new ProjectLabel(name, color, Integer.valueOf(id)));
+        }
         del_btn.setId(id);
-        labelMap.put(id, new ProjectLabel(name, color));
         del_btn.setOnAction(e -> {
             labelMap.remove(del_btn.getId());
             box_labels.getChildren().remove(new_box);
@@ -130,5 +141,61 @@ public class EditProjectController {
 
         new_box.getChildren().addAll(new_label, spacer, ban_btn);
         box_members.getChildren().add(new_box);
+    }
+
+    public void saveProject() {
+        OkHttpClient client = new OkHttpClient();
+        Dotenv dotenv = Dotenv.load();
+
+        FormBody.Builder builder = new FormBody.Builder()
+                .add("name", text_name.getText())
+                .add("description", text_description.getText());
+
+        AtomicInteger ind = new AtomicInteger();
+        labelMap.forEach((k, v) -> {
+            if (v.getId() != null) {
+                builder.add("labels[" + ind + "][id]", v.getId().toString());
+            }
+            builder.add("labels[" + ind + "][name]", v.getName());
+            builder.add("labels[" + ind + "][color]", v.getColor());
+            ind.getAndIncrement();
+        });
+
+        ind.set(0);
+        usersMap.forEach((k, v) -> {
+            builder.add("members[" + ind + "][id]", v.getId().toString());
+            builder.add("members[" + ind + "][banished]", String.valueOf(v.isBanished()));
+            ind.getAndIncrement();
+        });
+
+        Request request = new Request.Builder()
+                .url(dotenv.get("BASE_URL") + "/projects/" + current.getId())
+                .put(builder.build())
+                .addHeader("Authorization", "Bearer " + AuthService.getInstance().getUser().getToken())
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (response.code() == 500) {
+                label_error.setText("Une erreur est survenue");
+            } else {
+                if (response.code() == 401) {
+                    ScreenService.getInstance().changeScreen("login");
+                    return;
+                }
+
+                String res = response.body().string();
+                JSONObject json = new JSONObject(res);
+
+                if (response.code() == 400) {
+                    if (json.has("name")) {
+                        label_error.setText(json.getJSONArray("name").getString(0));
+                    }
+                } else {
+                    ScreenService.getInstance().changeScreen("show_projects");
+                }
+            }
+        } catch (IOException e) {
+            label_error.setText("Une erreur est survenue");
+        }
     }
 }

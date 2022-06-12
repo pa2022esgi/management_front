@@ -21,7 +21,7 @@ public class Main extends Application {
                     "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTY1NDk2MTE3NCwiZXhwIjoxNjU1MDQ3NTc0LCJuYmYiOjE2NTQ5NjExNzQsImp0aSI6Ik04NG9RcTV5Nkd6Q1YwTDgiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.eHv8z1DyBHbh6uVqpfrPYYIGDPWr_npVgOzetBCkDJU",
                     1,
                     "test@mail.com",
-                    false
+                    null
             ));
 
             addScreens();
