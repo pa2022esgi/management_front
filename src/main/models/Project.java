@@ -2,6 +2,7 @@ package main.models;
 
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.util.HashMap;
 
 public class Project {
@@ -11,8 +12,9 @@ public class Project {
     Integer id;
     private final HashMap<Integer, User> usersMap = new HashMap<>();
     private final HashMap<Integer, ProjectLabel> labelsMap = new HashMap<>();
+    private final HashMap<Integer, Task> tasksMap = new HashMap<>();
 
-    public Project(JSONObject json) {
+    public Project(JSONObject json) throws ParseException {
         this.id = json.getInt("id");
         this.name = json.getString("name");
         this.token = json.getString("token");
@@ -24,6 +26,10 @@ public class Project {
         for (int i=0; i < json.getJSONArray("labels").length(); i++) {
             JSONObject label = json.getJSONArray("labels").getJSONObject(i);
             labelsMap.put(label.getInt("id"), new ProjectLabel(label.getString("name"), label.getString("color"), label.getInt("id")));
+        }
+        for (int i = 0; i < json.getJSONArray("cards").length(); i++) {
+            JSONObject task = json.getJSONArray("cards").getJSONObject(i);
+            tasksMap.put(task.getInt("id"), new Task(task));
         }
     }
 
@@ -49,5 +55,9 @@ public class Project {
 
     public Integer getId() {
         return id;
+    }
+
+    public HashMap<Integer, Task> getTasksMap() {
+        return tasksMap;
     }
 }

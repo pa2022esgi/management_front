@@ -36,8 +36,6 @@ public class ScreenService {
         this.current = scene;
     }
 
-    public void joinProject() {}
-
     public void changeScreen (String name) throws IOException {
         Screen screen = screenMap.get(name);
         current.setRoot(FXMLLoader.load(getClass().getResource(screen.getPath())));

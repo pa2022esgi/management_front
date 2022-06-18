@@ -3,15 +3,20 @@ package main.controllers;
 import io.github.cdimascio.dotenv.Dotenv;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import main.models.Project;
 import main.services.ProjectService;
 import main.services.ScreenService;
 import main.services.AuthService;
+import main.utils.ColorUtil;
 import main.utils.ComponentsUtil;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -19,6 +24,7 @@ import okhttp3.Response;
 import org.json.JSONArray;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.HashMap;
 
 public class ShowProjectsController {
@@ -85,13 +91,14 @@ public class ShowProjectsController {
                 jsArray = new JSONArray(res);
 
                 createProjectBtn();
+                createTasks();
             }
-        } catch (IOException e) {
+        } catch (IOException | ParseException e) {
             ScreenService.getInstance().changeScreen("menu");
         }
     }
 
-    public void createProjectBtn() {
+    public void createProjectBtn() throws ParseException {
         for (int i = 0; i < jsArray.length(); i++) {
             Button new_btn = ComponentsUtil.createProjectButton(jsArray.getJSONObject(i).getString("name"));
             new_btn.setId(String.valueOf(i));
@@ -135,5 +142,46 @@ public class ShowProjectsController {
     public void addTask() throws IOException {
         ProjectService.getInstance().setProject(currentProject);
         ScreenService.getInstance().changeScreen("add_task");
+    }
+
+    public void createTasks() {
+        currentProject.getTasksMap().forEach((k, v) -> {
+            VBox new_box = new VBox();
+            new_box.setStyle("-fx-border-color: #000000");
+            new_box.setPadding(new Insets(10));
+
+            FlowPane contain_labels = new FlowPane();
+            contain_labels.setHgap(5);
+            contain_labels.setVgap(5);
+            v.getLabelsMap().forEach((id, val) -> {
+                Label label = new Label(val.getName());
+                label.setPadding(new Insets(3));
+                label.setStyle("-fx-background-color: " + val.getColor() + "; -fx-background-radius: 5; -fx-text-fill: " + ColorUtil.getContrastedColor(val.getColor()));
+                contain_labels.getChildren().add(label);
+            });
+
+            Label title = new Label(v.getTitle());
+            title.setPadding(new Insets(5, 0, 0, 0));
+            title.setStyle("-fx-font-weight: bold; -fx-font-size: 14");
+
+            new_box.getChildren().addAll(contain_labels, title);
+
+            if (v.getUser() != null) {
+                Label user = new Label("Assigné à : " + v.getUser().getEmail());
+                new_box.getChildren().add(user);
+            }
+
+            Label date = new Label("pour le " + v.getDate().toString());
+            date.setPadding(new Insets(20, 0,0 ,0));
+            new_box.getChildren().add(date);
+
+            if (v.getStatus() == 1) {
+                box_todo.getChildren().add(new_box);
+            } else if (v.getStatus() == 2) {
+                box_ongoing.getChildren().add(new_box);
+            } else if (v.getStatus() == 3) {
+                box_finished.getChildren().add(new_box);
+            }
+        });
     }
 }

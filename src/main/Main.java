@@ -18,7 +18,7 @@ public class Main extends Application {
         public void start(Stage stage) throws IOException {
 
             AuthService.getInstance().setUser(new User(
-                    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTY1NDk2MTE3NCwiZXhwIjoxNjU1MDQ3NTc0LCJuYmYiOjE2NTQ5NjExNzQsImp0aSI6Ik04NG9RcTV5Nkd6Q1YwTDgiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.eHv8z1DyBHbh6uVqpfrPYYIGDPWr_npVgOzetBCkDJU",
+                    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTY1NTU3NzY0MiwiZXhwIjoxNjU1NjY0MDQyLCJuYmYiOjE2NTU1Nzc2NDIsImp0aSI6InBlUUQyS1o5d0VVdEJ0OUQiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.9TfL02Lea4JFe_QIM0ZcSaX6981hPBl4HfulRy-9QtM",
                     1,
                     "test@mail.com",
                     null
