@@ -9,13 +9,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import main.models.Project;
 import main.services.ProjectService;
 import main.services.ScreenService;
 import main.services.AuthService;
+import main.services.TaskService;
 import main.utils.ColorUtil;
 import main.utils.ComponentsUtil;
 import okhttp3.OkHttpClient;
@@ -24,6 +23,7 @@ import okhttp3.Response;
 import org.json.JSONArray;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.util.HashMap;
 
@@ -171,9 +171,39 @@ public class ShowProjectsController {
                 new_box.getChildren().add(user);
             }
 
-            Label date = new Label("pour le " + v.getDate().toString());
-            date.setPadding(new Insets(20, 0,0 ,0));
-            new_box.getChildren().add(date);
+            HBox bottom_box = new HBox();
+            bottom_box.setPadding(new Insets(20, 0,0 ,0));
+            bottom_box.setAlignment(Pos.BOTTOM_LEFT);
+            try {
+                Label date = new Label("pour le " + v.getDate());
+
+                Region spacer = new Region();
+                HBox.setHgrow(spacer, Priority.ALWAYS);
+                Button edit_btn = ComponentsUtil.createIconButton(20, 20, "icon_edit");
+                Button del_btn = ComponentsUtil.createIconButton(16, 20, "icon_del");
+
+                bottom_box.getChildren().addAll(date, spacer);
+
+                if (!v.getDescription().isEmpty()){
+                    Button info_btn = ComponentsUtil.createIconButton(25, 20, "icon_eye");
+                    info_btn.setOnAction(e -> {
+                        TaskService.getInstance().setTask(v);
+                        try {
+                            ScreenService.getInstance().changeScreen("show_task");
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    });
+
+                    bottom_box.getChildren().add(info_btn);
+                }
+
+                bottom_box.getChildren().addAll(edit_btn, del_btn);
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+
+            new_box.getChildren().add(bottom_box);
 
             if (v.getStatus() == 1) {
                 box_todo.getChildren().add(new_box);

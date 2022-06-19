@@ -18,7 +18,7 @@ public class Main extends Application {
         public void start(Stage stage) throws IOException {
 
             AuthService.getInstance().setUser(new User(
-                    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTY1NTU3NzY0MiwiZXhwIjoxNjU1NjY0MDQyLCJuYmYiOjE2NTU1Nzc2NDIsImp0aSI6InBlUUQyS1o5d0VVdEJ0OUQiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.9TfL02Lea4JFe_QIM0ZcSaX6981hPBl4HfulRy-9QtM",
+                    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTY1NTY2NzI4NSwiZXhwIjoxNjU1NzUzNjg1LCJuYmYiOjE2NTU2NjcyODUsImp0aSI6IkJHdXJzTW5wT1RhVGE1dkMiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.TboGzk9TWwK38Hz5xR7SIxp9R9FI-87piK8rS9Z-zFE",
                     1,
                     "test@mail.com",
                     null
@@ -47,10 +47,13 @@ public class Main extends Application {
         ScreenService.getInstance().addScreen("register", 500, 500);
         ScreenService.getInstance().addScreen("show_projects", 1280, 760);
         ScreenService.getInstance().addScreen("add_task", 900, 440);
+        ScreenService.getInstance().addScreen("show_task", 600, 300);
     }
 
     public void addImages() {
         ImageService.getInstance().addImage("icon_del", "../ressources/icon/delete.png");
+        ImageService.getInstance().addImage("icon_eye", "../ressources/icon/eye.png");
+        ImageService.getInstance().addImage("icon_edit", "../ressources/icon/edit.png");
     }
 
     public static void main(String[] args) {
