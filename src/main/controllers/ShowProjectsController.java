@@ -185,7 +185,7 @@ public class ShowProjectsController {
                 bottom_box.getChildren().addAll(date, spacer);
 
                 if (!v.getDescription().isEmpty()){
-                    Button info_btn = ComponentsUtil.createIconButton(25, 20, "icon_eye");
+                    Button info_btn = ComponentsUtil.createIconButton(25, 18, "icon_eye");
                     info_btn.setOnAction(e -> {
                         TaskService.getInstance().setTask(v);
                         try {
@@ -197,6 +197,11 @@ public class ShowProjectsController {
 
                     bottom_box.getChildren().add(info_btn);
                 }
+
+                edit_btn.setOnAction(e -> {
+                    TaskService.getInstance().setTask(v);
+
+                });
 
                 bottom_box.getChildren().addAll(edit_btn, del_btn);
             } catch (URISyntaxException e) {
