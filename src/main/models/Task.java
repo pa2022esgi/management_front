@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
 public class Task {
+    Integer id;
     String title;
     String description;
     String date;
@@ -15,6 +16,7 @@ public class Task {
     private final HashMap<Integer, ProjectLabel> labelsMap = new HashMap<>();
 
     public Task(JSONObject json) throws ParseException {
+        this.id = json.getInt("id");
         this.title = json.getString("title");
         this.description = json.isNull("description") ? "" : json.getString("description");;
         this.date = new SimpleDateFormat("dd/MM/yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(json.getString("due_date")));
@@ -37,6 +39,10 @@ public class Task {
 
     public String getDate() {
         return date;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public User getUser() {

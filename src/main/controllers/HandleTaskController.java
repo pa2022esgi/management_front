@@ -6,9 +6,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import main.models.KeyValuePair;
 import main.models.Project;
+import main.models.Task;
 import main.services.AuthService;
 import main.services.ProjectService;
 import main.services.ScreenService;
+import main.services.TaskService;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -18,10 +20,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class AddTaskController {
-    @FXML private Button btn_create;
+public class HandleTaskController {
+    @FXML private Button btn_handle;
     @FXML private Button btn_cancel;
     @FXML private ComboBox<KeyValuePair> select_status;
     @FXML private ComboBox<KeyValuePair> select_member;
@@ -31,22 +37,58 @@ public class AddTaskController {
     @FXML private CheckComboBox<KeyValuePair> select_labels;
     @FXML private Label label_error;
 
-    Project current;
+    Project currentProject;
+    Task currentTask;
 
     @FXML
     public void initialize() throws IOException {
-        Platform.runLater(() -> ScreenService.getInstance().setCurrent(btn_create.getScene()));
-        current = ProjectService.getInstance().getProject();
+        Platform.runLater(() -> ScreenService.getInstance().setCurrent(btn_handle.getScene()));
+        currentProject = ProjectService.getInstance().getProject();
+        if (TaskService.getInstance().getTask() != null) {
+            currentTask = TaskService.getInstance().getTask();
+        }
 
-        current.getUsersMap().forEach((k, v) -> {
-            select_member.getItems().add(new KeyValuePair(v.getId(), v.getEmail()));
+        currentProject.getUsersMap().forEach((k, v) -> {
+            KeyValuePair pair = new KeyValuePair(v.getId(), v.getEmail());
+            select_member.getItems().add(pair);
+
+            if (currentTask != null && currentTask.getUser() != null && pair.getKey().equals(currentTask.getUser().getId())) {
+                select_member.setValue(pair);
+            }
         });
 
-        current.getLabelsMap().forEach((k, v) -> {
-            select_labels.getItems().add(new KeyValuePair(v.getId(), v.getName()));
+        ArrayList<Integer> selected = new ArrayList<>();
+        AtomicInteger ind = new AtomicInteger();
+        currentProject.getLabelsMap().forEach((k, v) -> {
+            KeyValuePair pair = new KeyValuePair(v.getId(), v.getName());
+            select_labels.getItems().add(pair);
+            if (currentTask != null && !currentTask.getLabelsMap().isEmpty()) {
+                currentTask.getLabelsMap().forEach((id, val) -> {
+                    if (val.getId().equals(v.getId())) {
+                        selected.add(ind.intValue());
+                    }
+                });
+            }
+            ind.getAndIncrement();
+        });
+
+        selected.forEach((val) -> {
+            select_labels.getCheckModel().check(val);
         });
 
         getStatuses();
+
+        if (TaskService.getInstance().getTask() != null) {
+            btn_handle.setText("Modifier la tache");
+
+            text_name.setText(currentTask.getTitle());
+            text_description.setText(currentTask.getDescription());
+            if (currentTask.getDate() != null) {
+                picker_date.setValue(LocalDate.parse(currentTask.getDate(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            }
+        } else {
+            btn_handle.setText("Créer la tache");
+        }
     }
 
     public void cancel() throws IOException {
@@ -77,7 +119,12 @@ public class AddTaskController {
 
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject obj = array.getJSONObject(i);
-                    select_status.getItems().add(new KeyValuePair(obj.getInt("id"), obj.getString("name")));
+                    KeyValuePair pair = new KeyValuePair(obj.getInt("id"), obj.getString("name"));
+                    select_status.getItems().add(pair);
+
+                    if (currentTask != null && pair.getKey().equals(currentTask.getStatus())) {
+                        select_status.setValue(pair);
+                    }
                 }
             }
         } catch (IOException e) {
@@ -126,13 +173,17 @@ public class AddTaskController {
                 builder.add("user_id", select_member.getValue().getKey().toString());
             }
 
-            Request request = new Request.Builder()
-                    .url(dotenv.get("BASE_URL") + "/projects/" + current.getId().toString() + "/cards")
-                    .post(builder.build())
-                    .addHeader("Authorization", "Bearer " + AuthService.getInstance().getUser().getToken())
-                    .build();
+            Request.Builder request = new Request.Builder();
 
-            try (Response response = client.newCall(request).execute()) {
+            if (currentTask != null) {
+                request.url(dotenv.get("BASE_URL") + "/projects/" + currentProject.getId().toString() + "/cards/" + currentTask.getId().toString()).put(builder.build());
+            } else {
+                request.url(dotenv.get("BASE_URL") + "/projects/" + currentProject.getId().toString() + "/cards").post(builder.build());
+            }
+
+            request.addHeader("Authorization", "Bearer " + AuthService.getInstance().getUser().getToken());
+
+            try (Response response = client.newCall(request.build()).execute()) {
                 if (response.code() == 500) {
                     label_error.setText("Une erreur est survenue");
                 } else {

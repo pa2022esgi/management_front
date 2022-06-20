@@ -122,6 +122,7 @@ public class ShowProjectsController {
 
             if (i == 0) {
                 currentProject = projectMap.get(String.valueOf(i));
+                ProjectService.getInstance().setProject(currentProject);
                 selectedButton = new_btn;
                 new_btn.setStyle(selected_class);
                 label_title.setText(currentProject.getToken() + " - " + currentProject.getName());
@@ -131,7 +132,6 @@ public class ShowProjectsController {
     }
 
     public void editProject() throws IOException {
-        ProjectService.getInstance().setProject(currentProject);
         ScreenService.getInstance().changeScreen("edit_project");
     }
 
@@ -141,7 +141,8 @@ public class ShowProjectsController {
 
     public void addTask() throws IOException {
         ProjectService.getInstance().setProject(currentProject);
-        ScreenService.getInstance().changeScreen("add_task");
+        TaskService.getInstance().setTask(null);
+        ScreenService.getInstance().changeScreen("handle_task");
     }
 
     public void createTasks() {
@@ -200,7 +201,11 @@ public class ShowProjectsController {
 
                 edit_btn.setOnAction(e -> {
                     TaskService.getInstance().setTask(v);
-
+                    try {
+                        ScreenService.getInstance().changeScreen("handle_task");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
                 });
 
                 bottom_box.getChildren().addAll(edit_btn, del_btn);

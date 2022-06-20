@@ -17,17 +17,17 @@ public class Main extends Application {
     @Override
         public void start(Stage stage) throws IOException {
 
-            AuthService.getInstance().setUser(new User(
-                    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTY1NTY2NzI4NSwiZXhwIjoxNjU1NzUzNjg1LCJuYmYiOjE2NTU2NjcyODUsImp0aSI6IkJHdXJzTW5wT1RhVGE1dkMiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.TboGzk9TWwK38Hz5xR7SIxp9R9FI-87piK8rS9Z-zFE",
+            /*AuthService.getInstance().setUser(new User(
+                    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTY1NTc1MzgyMSwiZXhwIjoxNjU1ODQwMjIxLCJuYmYiOjE2NTU3NTM4MjEsImp0aSI6Im9vUEtyTTJiUDFrVTcxaDEiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.Q3kwiWq9VS2jfkdT9RAhFXHowMpShqRvdfIDsR6Upjs",
                     1,
                     "test@mail.com",
                     null
-            ));
+            ));*/
 
             addScreens();
             addImages();
 
-            String startScreen = "show_projects";
+            String startScreen = "login";
 
             Parent root = ScreenService.getInstance().loadScreen(startScreen);
             Screen screen = ScreenService.getInstance().getScreen(startScreen);
@@ -46,7 +46,7 @@ public class Main extends Application {
         ScreenService.getInstance().addScreen("login", 500, 500);
         ScreenService.getInstance().addScreen("register", 500, 500);
         ScreenService.getInstance().addScreen("show_projects", 1280, 760);
-        ScreenService.getInstance().addScreen("add_task", 900, 440);
+        ScreenService.getInstance().addScreen("handle_task", 900, 440);
         ScreenService.getInstance().addScreen("show_task", 600, 300);
     }
 
