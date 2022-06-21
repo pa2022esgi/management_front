@@ -47,5 +47,7 @@ public class ScreenService {
         if (current.getWindow().getWidth() != screen.getWidth()) {
             current.getWindow().setWidth(screen.getWidth());
         }
+
+        current.getWindow().centerOnScreen();
     }
 }

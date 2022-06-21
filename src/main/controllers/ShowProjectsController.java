@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.*;
+import main.models.KeyValuePair;
 import main.models.Project;
 import main.services.ProjectService;
 import main.services.ScreenService;
@@ -21,6 +22,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -99,6 +101,7 @@ public class ShowProjectsController {
     }
 
     public void createProjectBtn() throws ParseException {
+        box_projects.getChildren().clear();
         for (int i = 0; i < jsArray.length(); i++) {
             Button new_btn = ComponentsUtil.createProjectButton(jsArray.getJSONObject(i).getString("name"));
             new_btn.setId(String.valueOf(i));
@@ -109,7 +112,7 @@ public class ShowProjectsController {
                 currentProject = projectMap.get(new_btn.getId());
                 label_title.setText(currentProject.getToken() + " - " + currentProject.getName());
                 text_description.setText(currentProject.getDescription().length() == 0 ? "Aucune description" : currentProject.getDescription());
-
+                createTasks();
                 if (new_btn != selectedButton) {
                     if (selectedButton != null) {
                         selectedButton.setStyle(unselect_class);
@@ -146,6 +149,9 @@ public class ShowProjectsController {
     }
 
     public void createTasks() {
+        box_finished.getChildren().clear();
+        box_ongoing.getChildren().clear();
+        box_todo.getChildren().clear();
         currentProject.getTasksMap().forEach((k, v) -> {
             VBox new_box = new VBox();
             new_box.setStyle("-fx-border-color: #000000");
@@ -223,5 +229,31 @@ public class ShowProjectsController {
                 box_finished.getChildren().add(new_box);
             }
         });
+    }
+
+    public void deleteTask(Integer id) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        Dotenv dotenv = Dotenv.load();
+
+        Request request = new Request.Builder()
+                .url(dotenv.get("BASE_URL") + "/projects/" + currentProject.getId().toString() + "/cards/" + id.toString())
+                .delete()
+                .addHeader("Authorization", "Bearer " + AuthService.getInstance().getUser().getToken())
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (response.code() == 500) {
+                getProjects();
+            } else {
+                if (response.code() == 401) {
+                    ScreenService.getInstance().changeScreen("login");
+                    return;
+                }
+
+               getProjects();
+            }
+        } catch (IOException e) {
+            ScreenService.getInstance().changeScreen("menu");
+        }
     }
 }
