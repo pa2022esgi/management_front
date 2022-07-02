@@ -7,8 +7,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
-import main.models.KeyValuePair;
 import main.models.Project;
 import main.services.ProjectService;
 import main.services.ScreenService;
@@ -20,7 +18,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -29,9 +26,7 @@ import java.util.HashMap;
 
 public class ShowProjectsController {
     @FXML private Button btn_menu;
-    @FXML private Button btn_edit;
-    @FXML private Button btn_delete;
-    @FXML private Button btn_task;
+    @FXML private HBox box_action;
     @FXML private ScrollPane scroll_projects;
     @FXML private VBox box_projects;
     @FXML private ScrollPane scroll_todo;
@@ -57,12 +52,6 @@ public class ShowProjectsController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            Stage stage = (Stage) btn_menu.getScene().getWindow();
-            stage.setOnCloseRequest(e -> {
-                Platform.exit();
-                System.exit(0);
-            });
         });
 
         scroll_projects.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -97,8 +86,19 @@ public class ShowProjectsController {
                 String res = response.body().string();
                 jsArray = new JSONArray(res);
 
-                createProjectBtn();
-                createTasks();
+                box_projects.getChildren().clear();
+                box_finished.getChildren().clear();
+                box_ongoing.getChildren().clear();
+                box_todo.getChildren().clear();
+                box_action.getChildren().clear();
+
+                if (jsArray.length() == 0) {
+                    label_title.setText("AUCUN PROJET");
+                    text_description.setText("");
+                } else {
+                    createProjectBtn();
+                }
+
             }
         } catch (IOException | ParseException e) {
             ScreenService.getInstance().changeScreen("menu");
@@ -106,18 +106,32 @@ public class ShowProjectsController {
     }
 
     public void createProjectBtn() throws ParseException {
-        box_projects.getChildren().clear();
+        String selected_class = "-fx-background-color: #0250F7; -fx-border-color: #000000; -fx-border-radius: 5; -fx-text-fill: #FFFFFF; -fx-cursor: hand;";
+        String unselect_class = "-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-radius: 5; -fx-text-fill: #000000; -fx-cursor: hand;";
+
         for (int i = 0; i < jsArray.length(); i++) {
-            Button new_btn = ComponentsUtil.createProjectButton(jsArray.getJSONObject(i).getString("name"));
-            new_btn.setId(String.valueOf(i));
-            projectMap.put(String.valueOf(i), new Project(jsArray.getJSONObject(i)));
-            String selected_class = "-fx-background-color: #0250F7; -fx-border-color: #000000; -fx-border-radius: 5; -fx-text-fill: #FFFFFF; -fx-cursor: hand;";
-            String unselect_class = "-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-radius: 5; -fx-text-fill: #000000; -fx-cursor: hand;";
+            Project project = new Project(jsArray.getJSONObject(i));
+
+            Boolean with_icon = AuthService.getInstance().getUser().getId().equals(project.getAuthor());
+            Button new_btn = ComponentsUtil.createProjectButton(project.getName(), with_icon);
+            new_btn.setId(String.valueOf(project.getId()));
+
+            projectMap.put(String.valueOf(project.getId()), project);
+
             new_btn.setOnAction(e -> {
+                box_finished.getChildren().clear();
+                box_ongoing.getChildren().clear();
+                box_todo.getChildren().clear();
+                box_action.getChildren().clear();
+
                 currentProject = projectMap.get(new_btn.getId());
+                ProjectService.getInstance().setProject(currentProject);
                 label_title.setText(currentProject.getToken() + " - " + currentProject.getName());
                 text_description.setText(currentProject.getDescription().length() == 0 ? "Aucune description" : currentProject.getDescription());
+
+                createActionBtn();
                 createTasks();
+
                 if (new_btn != selectedButton) {
                     if (selectedButton != null) {
                         selectedButton.setStyle(unselect_class);
@@ -127,24 +141,72 @@ public class ShowProjectsController {
                 }
             });
             box_projects.getChildren().add(new_btn);
+        }
 
-            if (i == 0) {
-                currentProject = projectMap.get(String.valueOf(i));
-                ProjectService.getInstance().setProject(currentProject);
-                selectedButton = new_btn;
-                new_btn.setStyle(selected_class);
-                label_title.setText(currentProject.getToken() + " - " + currentProject.getName());
-                text_description.setText(currentProject.getDescription().length() == 0 ? "Aucune description" : currentProject.getDescription());
+        if (ProjectService.getInstance().getProject() == null) {
+            currentProject = projectMap.get(projectMap.keySet().stream().findFirst().get());
+        } else {
+            currentProject =  projectMap.get(String.valueOf(ProjectService.getInstance().getProject().getId()));
+        }
+
+        Button selected = (Button) scroll_projects.getScene().lookup("#" + currentProject.getId().toString());
+        selectedButton = selected;
+        selected.setStyle(selected_class);
+
+        label_title.setText(currentProject.getToken() + " - " + currentProject.getName());
+        text_description.setText(currentProject.getDescription().length() == 0 ? "Aucune description" : currentProject.getDescription());
+        createTasks();
+        createActionBtn();
+    }
+
+    public void createActionBtn () {
+        try {
+            Button add_btn = ComponentsUtil.createIconButton(30, 30, "icon_add_card");
+            add_btn.setOnAction(ev -> {
+                try {
+                    addTask();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            });
+
+            box_action.getChildren().add(add_btn);
+        } catch (URISyntaxException uriSyntaxException) {
+            uriSyntaxException.printStackTrace();
+        }
+
+        if (AuthService.getInstance().getUser().getId().equals(currentProject.getAuthor())) {
+            try {
+                Button edit_btn = ComponentsUtil.createIconButton(27, 25, "icon_edit");
+                edit_btn.setOnAction(ev -> {
+                    try {
+                        ProjectService.getInstance().setProject(currentProject);
+                        ScreenService.getInstance().changeScreen("edit_project");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                });
+
+                box_action.getChildren().add(edit_btn);
+            } catch (URISyntaxException uriSyntaxException) {
+                uriSyntaxException.printStackTrace();
+            }
+
+            try {
+                Button del_btn = ComponentsUtil.createIconButton(23, 25, "icon_del");
+                del_btn.setOnAction(ev -> {
+                    try {
+                        deleteProject();
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                });
+
+                box_action.getChildren().add(del_btn);
+            } catch (URISyntaxException uriSyntaxException) {
+                uriSyntaxException.printStackTrace();
             }
         }
-    }
-
-    public void editProject() throws IOException {
-        ScreenService.getInstance().changeScreen("edit_project");
-    }
-
-    public void deleteProject() {
-
     }
 
     public void addTask() throws IOException {
@@ -154,9 +216,6 @@ public class ShowProjectsController {
     }
 
     public void createTasks() {
-        box_finished.getChildren().clear();
-        box_ongoing.getChildren().clear();
-        box_todo.getChildren().clear();
         currentProject.getTasksMap().forEach((k, v) -> {
             VBox new_box = new VBox();
             new_box.setStyle("-fx-border-color: #000000");
@@ -220,6 +279,14 @@ public class ShowProjectsController {
                     }
                 });
 
+                del_btn.setOnAction(e -> {
+                    try {
+                        deleteTask(v.getId());
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                });
+
                 bottom_box.getChildren().addAll(edit_btn, del_btn);
             } catch (URISyntaxException e) {
                 e.printStackTrace();
@@ -248,15 +315,32 @@ public class ShowProjectsController {
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-            if (response.code() == 500) {
-                getProjects();
+            if (response.code() == 401) {
+                ScreenService.getInstance().changeScreen("login");
             } else {
-                if (response.code() == 401) {
-                    ScreenService.getInstance().changeScreen("login");
-                    return;
-                }
+                getProjects();
+            }
+        } catch (IOException e) {
+            ScreenService.getInstance().changeScreen("menu");
+        }
+    }
 
-               getProjects();
+    public void deleteProject() throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        Dotenv dotenv = Dotenv.load();
+
+        Request request = new Request.Builder()
+                .url(dotenv.get("BASE_URL") + "/projects/" + currentProject.getId().toString())
+                .delete()
+                .addHeader("Authorization", "Bearer " + AuthService.getInstance().getUser().getToken())
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (response.code() == 401) {
+                ScreenService.getInstance().changeScreen("login");
+            } else {
+                ProjectService.getInstance().setProject(null);
+                getProjects();
             }
         } catch (IOException e) {
             ScreenService.getInstance().changeScreen("menu");

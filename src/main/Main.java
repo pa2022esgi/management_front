@@ -53,6 +53,8 @@ public class Main extends Application {
         ImageService.getInstance().addImage("icon_del", "../ressources/icon/delete.png");
         ImageService.getInstance().addImage("icon_eye", "../ressources/icon/eye.png");
         ImageService.getInstance().addImage("icon_edit", "../ressources/icon/edit.png");
+        ImageService.getInstance().addImage("icon_add_card", "../ressources/icon/add_card.png");
+        ImageService.getInstance().addImage("icon_admin", "../ressources/icon/admin.png");
     }
 
     public static void main(String[] args) {

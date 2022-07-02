@@ -67,10 +67,23 @@ public class ComponentsUtil {
         return new_label;
     }
 
-    public static Button createProjectButton(String name) {
+    public static Button createProjectButton(String name, Boolean with_icon) {
         Button new_btn = new Button();
         new_btn.setStyle("-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-radius: 5; -fx-cursor: hand;");
+
+        if (with_icon) {
+            try {
+                ImageView admin_icon = ImageService.getInstance().getImage("icon_admin");
+                admin_icon.setFitWidth(18);
+                admin_icon.setFitHeight(18);
+                new_btn.setGraphic(admin_icon);
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }
+
         new_btn.setText(name);
+
         Font font = new Font(14);
         new_btn.setFont(font);
         new_btn.setPrefWidth(210);

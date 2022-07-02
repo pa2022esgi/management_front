@@ -5,10 +5,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
@@ -140,41 +139,13 @@
             <Insets left="10.0" right="10.0" top="240.0" />
          </GridPane.margin>
       </Pane>
-      <Button fx:id="btn_delete" mnemonicParsing="false" style="-fx-border-color: transparent; -fx-background-color: transparent;" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+      <HBox fx:id="box_action" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
          <GridPane.margin>
-            <Insets right="10.0" top="5.0" />
+            <Insets bottom="230.0" right="10.0" top="5.0" />
          </GridPane.margin>
-         <graphic>
-            <ImageView fitHeight="30.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../icon/delete.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button fx:id="btn_task" mnemonicParsing="false" onAction="#addTask" style="-fx-border-color: transparent; -fx-background-color: transparent; -fx-cursor: hand;" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
-         <graphic>
-            <ImageView fitHeight="29.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
-               <image>
-                  <Image url="@../icon/add_card.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <GridPane.margin>
-            <Insets right="110.0" top="2.0" />
-         </GridPane.margin>
-      </Button>
-      <Button fx:id="btn_edit" mnemonicParsing="false" onAction="#editProject" prefHeight="37.0" prefWidth="46.0" style="-fx-border-color: transparent; -fx-background-color: transparent; -fx-cursor: hand;" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
-         <graphic>
-            <ImageView fitHeight="23.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
-               <image>
-                  <Image url="@../icon/edit.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <GridPane.margin>
-            <Insets right="55.0" top="4.0" />
-         </GridPane.margin>
-      </Button>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </HBox>
    </children>
 </GridPane>
