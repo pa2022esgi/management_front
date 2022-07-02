@@ -5,11 +5,9 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.stage.Stage;
 import main.models.KeyValuePair;
 import main.models.Project;
 import main.services.ProjectService;
@@ -59,7 +57,14 @@ public class ShowProjectsController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            Stage stage = (Stage) btn_menu.getScene().getWindow();
+            stage.setOnCloseRequest(e -> {
+                Platform.exit();
+                System.exit(0);
+            });
         });
+
         scroll_projects.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scroll_todo.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scroll_ongoing.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -193,13 +198,14 @@ public class ShowProjectsController {
 
                 if (!v.getDescription().isEmpty()){
                     Button info_btn = ComponentsUtil.createIconButton(25, 18, "icon_eye");
+
                     info_btn.setOnAction(e -> {
-                        TaskService.getInstance().setTask(v);
-                        try {
-                            ScreenService.getInstance().changeScreen("show_task");
-                        } catch (IOException ioException) {
-                            ioException.printStackTrace();
-                        }
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle(v.getTitle());
+                        alert.setHeaderText(null);
+                        alert.setContentText(v.getDescription());
+
+                        alert.showAndWait();
                     });
 
                     bottom_box.getChildren().add(info_btn);

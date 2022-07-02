@@ -18,7 +18,7 @@ public class Main extends Application {
         public void start(Stage stage) throws IOException {
 
             AuthService.getInstance().setUser(new User(
-                    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTY1NTgwMzA0MSwiZXhwIjoxNjU1ODg5NDQxLCJuYmYiOjE2NTU4MDMwNDEsImp0aSI6ImpWQ2U0aEpUQjdqUmw0QWciLCJzdWIiOjQsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.pIJkgxJGXWRVbAUjELYwSp5WA8XlmDCk50F0vPUiXv4",
+                    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTY1Njc2MzkwOCwiZXhwIjoxNjU2ODUwMzA4LCJuYmYiOjE2NTY3NjM5MDgsImp0aSI6InJyamdpRmRvR1pDalZ2UjMiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.DvD69p-98JGUfajB8bJpzwmVzxURLSX1pboUcQWHk7I",
                     1,
                     "sananes@mail.com",
                     null
@@ -47,7 +47,6 @@ public class Main extends Application {
         ScreenService.getInstance().addScreen("register", 500, 500);
         ScreenService.getInstance().addScreen("show_projects", 1280, 760);
         ScreenService.getInstance().addScreen("handle_task", 900, 440);
-        ScreenService.getInstance().addScreen("show_task", 600, 300);
     }
 
     public void addImages() {
