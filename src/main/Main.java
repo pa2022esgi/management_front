@@ -3,6 +3,7 @@ package main;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import main.models.User;
 import main.services.AuthService;
@@ -27,12 +28,13 @@ public class Main extends Application {
             addScreens();
             addImages();
 
-            String startScreen = "show_projects";
+            String startScreen = "login";
 
             Parent root = ScreenService.getInstance().loadScreen(startScreen);
             Screen screen = ScreenService.getInstance().getScreen(startScreen);
             Scene scene = new Scene(root, screen.getWidth(), screen.getHeight());
-            stage.setTitle("Application");
+            stage.setTitle("Management");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("ressources/icon/logo.png")));
             stage.setScene(scene);
             stage.centerOnScreen();
             stage.setResizable(false);
