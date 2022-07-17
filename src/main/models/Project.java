@@ -11,11 +11,13 @@ public class Project {
     String token;
     Integer id;
     Integer created_by;
+    JSONObject json;
     private final HashMap<Integer, User> usersMap = new HashMap<>();
     private final HashMap<Integer, ProjectLabel> labelsMap = new HashMap<>();
     private final HashMap<Integer, Task> tasksMap = new HashMap<>();
 
     public Project(JSONObject json) throws ParseException {
+        this.json = json;
         this.id = json.getInt("id");
         this.created_by = json.getInt("created_by");
         this.name = json.getString("name");
@@ -65,5 +67,9 @@ public class Project {
 
     public HashMap<Integer, Task> getTasksMap() {
         return tasksMap;
+    }
+
+    public JSONObject getJson() {
+        return json;
     }
 }

@@ -14,6 +14,7 @@ public class MenuController {
     @FXML private Button btn_new;
     @FXML private Button btn_logout;
     @FXML private Label label_email;
+    @FXML private Button btn_plugins;
 
     @FXML
     public void initialize() {
@@ -31,5 +32,9 @@ public class MenuController {
 
     public void newProject() throws IOException {
         ScreenService.getInstance().changeScreen("add_project");
+    }
+
+    public void plugins() throws IOException {
+        ScreenService.getInstance().changeScreen("plugins");
     }
 }

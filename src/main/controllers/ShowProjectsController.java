@@ -8,10 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import main.models.Project;
-import main.services.ProjectService;
-import main.services.ScreenService;
-import main.services.AuthService;
-import main.services.TaskService;
+import main.services.*;
 import main.utils.ColorUtil;
 import main.utils.ComponentsUtil;
 import okhttp3.OkHttpClient;
@@ -20,6 +17,7 @@ import okhttp3.Response;
 import org.json.JSONArray;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.util.HashMap;
@@ -160,6 +158,23 @@ public class ShowProjectsController {
     }
 
     public void createActionBtn () {
+        if(PluginService.getInstance().activated) {
+            try {
+                Button add_btn = ComponentsUtil.createIconButton(30, 30, "icon_pdf");
+                add_btn.setOnAction(ev -> {
+                    try {
+                        PluginService.getInstance().toPdf(currentProject.getJson());
+                    } catch (InvocationTargetException | IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                });
+
+                box_action.getChildren().add(add_btn);
+            } catch (URISyntaxException uriSyntaxException) {
+                uriSyntaxException.printStackTrace();
+            }
+        }
+
         try {
             Button add_btn = ComponentsUtil.createIconButton(30, 30, "icon_add_card");
             add_btn.setOnAction(ev -> {

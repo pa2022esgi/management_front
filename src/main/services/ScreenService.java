@@ -19,7 +19,7 @@ public class ScreenService {
     public static ScreenService getInstance() { return INSTANCE; }
 
     public void addScreen(String name, int width, int height) {
-        String path = "../ressources/fxml/" + name + ".fxml";
+        String path = "/main/ressources/fxml/" + name + ".fxml";
         screenMap.put(name, new Screen(path, width, height));
     }
 
