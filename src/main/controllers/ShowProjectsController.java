@@ -164,7 +164,7 @@ public class ShowProjectsController {
                 add_btn.setOnAction(ev -> {
                     try {
                         PluginService.getInstance().toPdf(currentProject.getJson());
-                    } catch (InvocationTargetException | IllegalAccessException e) {
+                    } catch (InvocationTargetException | IllegalAccessException | IOException e) {
                         e.printStackTrace();
                     }
                 });

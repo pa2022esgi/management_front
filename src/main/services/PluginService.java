@@ -2,6 +2,7 @@ package main.services;
 
 import org.json.JSONObject;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -69,7 +70,10 @@ public class PluginService {
         name = (String) methods.get(0).invoke(pluginInstance);
     }
 
-    public void toPdf(JSONObject project) throws InvocationTargetException, IllegalAccessException {
+    public void toPdf(JSONObject project) throws InvocationTargetException, IllegalAccessException, IOException {
         methods.get(1).invoke(pluginInstance, project);
+        File result = new File("./pdf/result.pdf");
+
+        Desktop.getDesktop().open(result);
     }
 }
