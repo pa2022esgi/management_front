@@ -18,17 +18,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException{
-        AuthService.getInstance().setUser(new User(
-                "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTY1ODA0OTIyNSwiZXhwIjoxNjU4MTM1NjI1LCJuYmYiOjE2NTgwNDkyMjUsImp0aSI6IkxDWGFjcVhVZUVYOEhsV00iLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.WAn1MnUSbwmcA1re_SQy0od66FN9zuzZ87OCzaInHsk",
-                1,
-                "test@mail.com",
-                null
-        ));
 
         addScreens();
         addImages();
 
-        String startScreen = "menu";
+        String startScreen = "login";
 
         Parent root = ScreenService.getInstance().loadScreen(startScreen);
         Screen screen = ScreenService.getInstance().getScreen(startScreen);

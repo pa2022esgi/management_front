@@ -11,5 +11,10 @@
 
 https://www.youtube.com/watch?v=hCwtVYSXmsU
 
+---
+###Utils
 
+dossier pour les plugins : `plugins`
+
+dossier pour les pdf : `pdf`
 
